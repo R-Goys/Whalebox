@@ -1,8 +1,9 @@
 package main
 
 import (
-	"github/R-Goys/Whalebox/pkg/log"
 	"os"
+
+	"github.com/R-Goys/Whalebox/pkg/log"
 
 	"github.com/urfave/cli"
 )

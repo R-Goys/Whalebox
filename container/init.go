@@ -2,9 +2,10 @@ package container
 
 import (
 	"fmt"
-	"github/R-Goys/Whalebox/pkg/log"
 	"os"
 	"syscall"
+
+	"github.com/R-Goys/Whalebox/pkg/log"
 )
 
 func RunContainerInitProcess(cmd string, args []string) error {

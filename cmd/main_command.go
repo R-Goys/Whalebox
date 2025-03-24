@@ -2,8 +2,9 @@ package main
 
 import (
 	"fmt"
-	"github/R-Goys/Whalebox/container"
-	"github/R-Goys/Whalebox/pkg/log"
+
+	"github.com/R-Goys/Whalebox/container"
+	"github.com/R-Goys/Whalebox/pkg/log"
 
 	"errors"
 
@@ -46,7 +47,9 @@ func runAction(c *cli.Context) error {
 		log.Error("Please specify a container image name")
 		return errors.New("please specify a container image name")
 	}
+	//此处拿到第一条参数
 	cmd := c.Args().Get(0)
+	//此处是获取-ti的参数
 	tty := c.Bool("ti")
 	Run(cmd, tty)
 	return nil

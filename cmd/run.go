@@ -1,12 +1,14 @@
 package main
 
 import (
-	"github/R-Goys/Whalebox/container"
-	"github/R-Goys/Whalebox/pkg/log"
 	"os"
+
+	"github.com/R-Goys/Whalebox/container"
+	"github.com/R-Goys/Whalebox/pkg/log"
 )
 
 func Run(cmd string, tty bool) {
+	//新建一个父进程来管理一个容器
 	parent := container.NewParentProcess(tty, cmd)
 	if err := parent.Start(); err != nil {
 		log.Error(err.Error())
