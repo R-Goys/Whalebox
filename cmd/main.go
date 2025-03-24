@@ -4,7 +4,7 @@ import (
 	"github/R-Goys/Whalebox/pkg/log"
 	"os"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli"
 )
 
 const (
@@ -19,7 +19,7 @@ func main() {
 	app.Version = Version
 	app.Usage = Usage
 
-	app.Commands = []*cli.Command{
+	app.Commands = []cli.Command{
 		initCommand,
 		runCommand,
 	}
@@ -31,6 +31,6 @@ func main() {
 	}
 
 	if err := app.Run(os.Args); err != nil {
-		log.Fatal(err)
+		log.Error(err.Error())
 	}
 }

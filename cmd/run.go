@@ -9,7 +9,7 @@ import (
 func Run(cmd string, tty bool) {
 	parent := container.NewParentProcess(tty, cmd)
 	if err := parent.Start(); err != nil {
-		log.Error(err)
+		log.Error(err.Error())
 	}
 	parent.Wait()
 	os.Exit(-1)

@@ -1,14 +1,16 @@
 package main
 
 import (
+	"fmt"
+	"github/R-Goys/Whalebox/container"
 	"github/R-Goys/Whalebox/pkg/log"
 
 	"errors"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli"
 )
 
-var initCommand = &cli.Command{
+var initCommand = cli.Command{
 	Name:   "init",
 	Usage:  "Init container process run user's process in container. Do not call it outside.",
 	Action: initAction,
@@ -17,22 +19,22 @@ var initCommand = &cli.Command{
 func initAction(c *cli.Context) error {
 	log.Info("init command")
 	cmd := c.Args().Get(0)
-	log.Info("cmd is:", cmd)
-	err := container.RunContainerInitProcess(cmd)
+	log.Info(fmt.Sprintf("cmd is: %s", cmd))
+	err := container.RunContainerInitProcess(cmd, nil)
 	if err != nil {
-		log.Error(err)
+		log.Error(err.Error())
 		return err
 	}
 	return nil
 }
 
-var runCommand = &cli.Command{
-	Name:    "run",
-	Aliases: []string{"r"},
-	Usage:   "Run a container",
-	Action:  runAction,
+var runCommand = cli.Command{
+	Name: "run",
+	Usage: `Run a container With namespace and cgroup limit.
+		    ./cmd run -ti [command]`,
+	Action: runAction,
 	Flags: []cli.Flag{
-		&cli.StringFlag{
+		&cli.BoolFlag{
 			Name:  "ti",
 			Usage: "enable tty",
 		},
@@ -40,9 +42,9 @@ var runCommand = &cli.Command{
 }
 
 func runAction(c *cli.Context) error {
-	if c.Args().Len() < 1 {
+	if len(c.Args()) < 1 {
 		log.Error("Please specify a container image name")
-		return errors.New("Please specify a container image name")
+		return errors.New("please specify a container image name")
 	}
 	cmd := c.Args().Get(0)
 	tty := c.Bool("ti")
