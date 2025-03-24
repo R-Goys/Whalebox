@@ -1,0 +1,3 @@
+I'm image-layer4
+
+Write to mnt's image-layer4.txt
