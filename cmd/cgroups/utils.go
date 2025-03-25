@@ -10,6 +10,7 @@ import (
 	"github.com/R-Goys/Whalebox/pkg/log"
 )
 
+// 通过subsystem和cgroupPath获取cgroup的路径
 func GetCgroupPath(subsystem, cgroupPath string, autoCreate bool) (string, error) {
 	cgroupRoot := FindCgroupMountpoint(subsystem)
 	if _, err := os.Stat(path.Join(cgroupRoot, cgroupPath)); err == nil || (autoCreate && os.IsNotExist(err)) {

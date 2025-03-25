@@ -13,9 +13,9 @@ import (
 
 type MemorySubSystem struct{}
 
-// Apply implements Subsystem.
+// Apply implements Subsystem, 此处将进程添加到指定的cgroup
 func (m *MemorySubSystem) Apply(CgroupPath string, pid int) error {
-	if subsysCgroupPath, err := GetCgroupPath(m.Name(), "", true); err == nil {
+	if subsysCgroupPath, err := GetCgroupPath(m.Name(), CgroupPath, true); err == nil {
 		if err := os.WriteFile(path.Join(subsysCgroupPath, "cgroup.procs"), []byte(strconv.Itoa(pid)), 0644); err != nil {
 			log.Error("failed to add process to cgroup: %v" + err.Error())
 			return fmt.Errorf("failed to add process to cgroup: %v", err)
@@ -32,10 +32,10 @@ func (m *MemorySubSystem) Name() string {
 	return "memory"
 }
 
-// Remove implements Subsystem.
+// Remove implements Subsystem, 此处将指定的cgroup删除
 func (m *MemorySubSystem) Remove(path string) error {
 	if subsysGroupPath, err := GetCgroupPath(m.Name(), path, false); err == nil {
-		if err := os.RemoveAll(subsysGroupPath); err != nil {
+		if err := os.Remove(subsysGroupPath); err != nil {
 			return fmt.Errorf("failed to remove cgroup path %s: %v", subsysGroupPath, err)
 		}
 		return nil
@@ -44,7 +44,7 @@ func (m *MemorySubSystem) Remove(path string) error {
 	}
 }
 
-// Set implements Subsystem.
+// Set implements Subsystem, 此处为cgroup设置资源限制，也就是内存的限制
 func (s *MemorySubSystem) Set(cgroupPath string, resources *ResourceConfig) error {
 	if SubSystemPath, err := GetCgroupPath(s.Name(), cgroupPath, true); err == nil {
 		//设置内存限制
