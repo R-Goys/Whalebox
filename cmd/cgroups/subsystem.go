@@ -1,8 +1,8 @@
 package cgroups
 
 type ResourceConfig struct {
-	MemoryLimit int64
-	CpuShares   int64
+	MemoryLimit string //内存限制
+	CpuShares   string
 	CpuSet      string
 }
 
@@ -12,7 +12,7 @@ type Subsystem interface {
 	//为某个cgroup设置资源限制
 	Set(path string, resources *ResourceConfig) error
 	//添加进程到cgroup
-	Apply(pid int) error
+	Apply(CgroupPath string, pid int) error
 	//删除指定的cgroup
 	Remove(path string) error
 }
