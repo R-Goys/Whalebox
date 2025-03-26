@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 
+	subsystem "github.com/R-Goys/Whalebox/cgroups/subsystems"
 	"github.com/R-Goys/Whalebox/container"
 	"github.com/R-Goys/Whalebox/pkg/log"
 
@@ -21,7 +22,7 @@ func initAction(c *cli.Context) error {
 	log.Info("init command")
 	cmd := c.Args().Get(0)
 	log.Info(fmt.Sprintf("cmd is: %s", cmd))
-	err := container.RunContainerInitProcess(cmd, nil)
+	err := container.RunContainerInitProcess()
 	if err != nil {
 		log.Error(err.Error())
 		return err
@@ -39,6 +40,18 @@ var runCommand = cli.Command{
 			Name:  "ti",
 			Usage: "enable tty",
 		},
+		&cli.StringFlag{
+			Name:  "m",
+			Usage: "Set memory limit for container",
+		},
+		&cli.StringFlag{
+			Name:  "cpuset",
+			Usage: "Set CPU limit for container",
+		},
+		&cli.StringFlag{
+			Name:  "cpushare",
+			Usage: "Set CPU share for container",
+		},
 	},
 }
 
@@ -47,10 +60,19 @@ func runAction(c *cli.Context) error {
 		log.Error("Please specify a container image name")
 		return errors.New("please specify a container image name")
 	}
+	var cmdArray []string
+	for i := 0; i < len(c.Args()); i++ {
+		cmdArray = append(cmdArray, c.Args()[i])
+	}
 	//此处拿到第一条参数
-	cmd := c.Args().Get(0)
 	//此处是获取-ti的参数
 	tty := c.Bool("ti")
-	Run(cmd, tty)
+	resource := &subsystem.ResourceConfig{
+		MemoryLimit: c.String("m"),
+		CpuShares:   c.String("cpushare"),
+		CpuSet:      c.String("cpuset"),
+	}
+
+	Run(tty, cmdArray, resource)
 	return nil
 }

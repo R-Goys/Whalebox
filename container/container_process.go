@@ -1,14 +1,21 @@
 package container
 
 import (
+	"fmt"
 	"os"
 	"os/exec"
 	"syscall"
+
+	"github.com/R-Goys/Whalebox/pkg/log"
 )
 
-func NewParentProcess(tty bool, command string) *exec.Cmd {
-	arg := []string{"init", command}
-	cmd := exec.Command("/proc/self/exe", arg...)
+func NewParentProcess(tty bool) (*exec.Cmd, *os.File) {
+	readPipe, writePipe, err := NewPipe()
+	if err != nil {
+		log.Error("NewParentProcess: Failed to create pipe: " + err.Error())
+		return nil, nil
+	}
+	cmd := exec.Command("/proc/self/exe", "init")
 	cmd.SysProcAttr = &syscall.SysProcAttr{
 		Cloneflags: syscall.CLONE_NEWUTS |
 			syscall.CLONE_NEWPID | syscall.CLONE_NEWNS |
@@ -34,5 +41,17 @@ func NewParentProcess(tty bool, command string) *exec.Cmd {
 		cmd.Stdout = os.Stdout
 		cmd.Stderr = os.Stderr
 	}
-	return cmd
+	cmd.ExtraFiles = []*os.File{readPipe}
+	// log.Info(fmt.Sprintf("Command: %v", cmd))
+	return cmd, writePipe
+}
+
+func NewPipe() (*os.File, *os.File, error) {
+	read, write, err := os.Pipe()
+	if err != nil {
+		log.Error("NewPipe: Failed to create pipe: " + err.Error())
+		return nil, nil, err
+	}
+	log.Info(fmt.Sprintf("New pipe: read: %d, write: %d", read.Fd(), write.Fd()))
+	return read, write, nil
 }

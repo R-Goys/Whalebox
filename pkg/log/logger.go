@@ -1,6 +1,8 @@
 package log
 
 import (
+	"os"
+
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 )
@@ -8,16 +10,12 @@ import (
 var logger *zap.Logger
 
 func InitLogger() {
-	config := zap.NewProductionConfig()
-	config.EncoderConfig = zapcore.EncoderConfig{
-		MessageKey:   "msg",
-		EncodeLevel:  zapcore.CapitalColorLevelEncoder, // 彩色日志
-		EncodeTime:   zapcore.ISO8601TimeEncoder,       // 时间格式
-		EncodeCaller: zapcore.ShortCallerEncoder,
-	}
-	config.Encoding = "console" // 切换为 console 格式
+	file, _ := os.OpenFile("/home/rinai/PROJECTS/Whalebox/pkg/log/record.log", os.O_APPEND|os.O_CREATE|os.O_RDWR, 0666)
+	writerSyncer := zapcore.AddSync(file)
+	encoder := zapcore.NewConsoleEncoder(zap.NewDevelopmentEncoderConfig())
+	core := zapcore.NewCore(encoder, writerSyncer, zapcore.DebugLevel)
 
-	logger, _ = config.Build()
+	logger = zap.New(core)
 }
 
 func Info(msg string, fields ...zap.Field) {
