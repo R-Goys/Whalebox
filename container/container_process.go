@@ -42,7 +42,7 @@ func NewParentProcess(tty bool) (*exec.Cmd, *os.File) {
 		cmd.Stderr = os.Stderr
 	}
 	cmd.ExtraFiles = []*os.File{readPipe}
-	// log.Info(fmt.Sprintf("Command: %v", cmd))
+	log.Info(fmt.Sprintf("Command: %v", cmd))
 	return cmd, writePipe
 }
 

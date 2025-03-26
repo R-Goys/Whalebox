@@ -1,0 +1,5 @@
+2025-03-26T21:35:35.402+0800	INFO	Starting Whalebox...
+2025-03-26T21:35:35.402+0800	INFO	New pipe: read: 6, write: 7
+2025-03-26T21:35:35.402+0800	INFO	Command: /proc/self/exe init
+2025-03-26T21:35:35.420+0800	DEBUG	cpu shares not set
+2025-03-26T21:35:35.420+0800	INFO	Sending command to container: /bin/sh

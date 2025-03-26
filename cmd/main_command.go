@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	subsystem "github.com/R-Goys/Whalebox/cgroups/subsystems"
+	cgroup "github.com/R-Goys/Whalebox/cgroups"
 	"github.com/R-Goys/Whalebox/container"
 	"github.com/R-Goys/Whalebox/pkg/log"
 
@@ -67,7 +67,7 @@ func runAction(c *cli.Context) error {
 	//此处拿到第一条参数
 	//此处是获取-ti的参数
 	tty := c.Bool("ti")
-	resource := &subsystem.ResourceConfig{
+	resource := &cgroup.ResourceConfig{
 		MemoryLimit: c.String("m"),
 		CpuShares:   c.String("cpushare"),
 		CpuSet:      c.String("cpuset"),
