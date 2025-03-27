@@ -42,6 +42,7 @@ func NewParentProcess(tty bool) (*exec.Cmd, *os.File) {
 		cmd.Stderr = os.Stderr
 	}
 	cmd.ExtraFiles = []*os.File{readPipe}
+	cmd.Dir = "/home/rinai/PROJECTS/Whalebox/example/busybox"
 	log.Info(fmt.Sprintf("Command: %v", cmd))
 	return cmd, writePipe
 }

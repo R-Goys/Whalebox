@@ -1,14 +1,33 @@
-2025-03-27T20:01:06.623+0800	INFO	Starting Whalebox...
-2025-03-27T20:01:06.623+0800	DEBUG	Arg[0]: /bin/sh
-2025-03-27T20:01:06.623+0800	DEBUG	{"MemoryLimit":"100m","CpuShares":"","CpuSet":"10"}
-2025-03-27T20:01:06.623+0800	INFO	New pipe: read: 6, write: 7
-2025-03-27T20:01:06.623+0800	INFO	Command: /proc/self/exe init
-2025-03-27T20:01:06.626+0800	INFO	Starting Whalebox...
-2025-03-27T20:01:06.626+0800	INFO	init command begin
-2025-03-27T20:01:06.626+0800	DEBUG	pipe Create
-2025-03-27T20:01:06.634+0800	DEBUG	cpu shares not set
-2025-03-27T20:01:06.634+0800	INFO	Sending command to container: /bin/sh
-2025-03-27T20:01:06.634+0800	INFO	Received command from parent: /bin/sh
-2025-03-27T20:01:06.634+0800	INFO	RunContainerInitProcess, cmd is: [/bin/sh]
-2025-03-27T20:01:06.634+0800	INFO	Find path: /bin/sh
-2025-03-27T20:01:31.065+0800	INFO	cgroup whalebox/41134 removed
+2025-03-27T22:14:49.215+0800	INFO	Starting Whalebox...
+2025-03-27T22:14:49.215+0800	DEBUG	Arg[0]: sh
+2025-03-27T22:14:49.215+0800	DEBUG	{"MemoryLimit":"","CpuShares":"","CpuSet":""}
+2025-03-27T22:14:49.215+0800	INFO	New pipe: read: 6, write: 7
+2025-03-27T22:14:49.215+0800	INFO	Command: /proc/self/exe init
+2025-03-27T22:14:49.218+0800	INFO	Starting Whalebox...
+2025-03-27T22:14:49.218+0800	INFO	init command begin
+2025-03-27T22:14:49.218+0800	DEBUG	pipe Create
+2025-03-27T22:14:49.228+0800	DEBUG	memory limit not set
+2025-03-27T22:14:49.228+0800	DEBUG	cpu shares not set
+2025-03-27T22:14:49.228+0800	DEBUG	cpuset not set
+2025-03-27T22:14:49.228+0800	INFO	Sending command to container: sh
+2025-03-27T22:14:49.228+0800	INFO	Received command from parent: sh
+2025-03-27T22:14:49.228+0800	INFO	RunContainerInitProcess, cmd is: [sh]
+2025-03-27T22:14:49.228+0800	INFO	Current directory: /home/rinai/PROJECTS/Whalebox/example/busybox
+2025-03-27T22:14:49.228+0800	INFO	Find path: /bin/sh
+2025-03-27T22:18:08.712+0800	INFO	cgroup whalebox/12610 removed
+2025-03-27T22:18:10.354+0800	INFO	Starting Whalebox...
+2025-03-27T22:18:10.354+0800	DEBUG	Arg[0]: sh
+2025-03-27T22:18:10.354+0800	DEBUG	{"MemoryLimit":"","CpuShares":"","CpuSet":""}
+2025-03-27T22:18:10.354+0800	INFO	New pipe: read: 6, write: 7
+2025-03-27T22:18:10.354+0800	INFO	Command: /proc/self/exe init
+2025-03-27T22:18:10.358+0800	INFO	Starting Whalebox...
+2025-03-27T22:18:10.358+0800	INFO	init command begin
+2025-03-27T22:18:10.358+0800	DEBUG	pipe Create
+2025-03-27T22:18:10.366+0800	DEBUG	memory limit not set
+2025-03-27T22:18:10.366+0800	DEBUG	cpu shares not set
+2025-03-27T22:18:10.366+0800	DEBUG	cpuset not set
+2025-03-27T22:18:10.366+0800	INFO	Sending command to container: sh
+2025-03-27T22:18:10.366+0800	INFO	Received command from parent: sh
+2025-03-27T22:18:10.366+0800	INFO	RunContainerInitProcess, cmd is: [sh]
+2025-03-27T22:18:10.366+0800	INFO	Current directory: /home/rinai/PROJECTS/Whalebox/example/busybox
+2025-03-27T22:18:10.367+0800	INFO	Find path: /bin/sh
