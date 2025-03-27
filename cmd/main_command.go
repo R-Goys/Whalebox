@@ -1,6 +1,9 @@
 package main
 
 import (
+	"encoding/json"
+	"fmt"
+
 	cgroup "github.com/R-Goys/Whalebox/cgroups"
 	"github.com/R-Goys/Whalebox/container"
 	"github.com/R-Goys/Whalebox/pkg/log"
@@ -17,7 +20,7 @@ var initCommand = cli.Command{
 }
 
 func initAction(c *cli.Context) error {
-	log.Info("init command")
+	log.Info("init command begin")
 	err := container.RunContainerInitProcess()
 	if err != nil {
 		log.Error(err.Error())
@@ -58,6 +61,7 @@ func runAction(c *cli.Context) error {
 	}
 	var cmdArray []string
 	for i := 0; i < len(c.Args()); i++ {
+		log.Debug(fmt.Sprintf("Arg[%d]: %s", i, c.Args()[i]))
 		cmdArray = append(cmdArray, c.Args()[i])
 	}
 	//此处拿到第一条参数
@@ -68,7 +72,8 @@ func runAction(c *cli.Context) error {
 		CpuShares:   c.String("cpushare"),
 		CpuSet:      c.String("cpuset"),
 	}
-
+	re, _ := json.Marshal(resource)
+	log.Debug(string(re))
 	Run(tty, cmdArray, resource)
 	return nil
 }

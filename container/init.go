@@ -20,10 +20,8 @@ func RunContainerInitProcess() error {
 	}
 	log.Info(fmt.Sprintf("RunContainerInitProcess, cmd is: %s", cmdArray))
 	defaultMountFlags := syscall.MS_NOEXEC | syscall.MS_NOSUID | syscall.MS_NODEV
-	if err := syscall.Mount("proc", "/proc", "proc", uintptr(defaultMountFlags), ""); err != nil {
-		log.Error(err.Error())
-		return err
-	}
+	syscall.Mount("", "/", "", syscall.MS_PRIVATE|syscall.MS_REC, "")
+	syscall.Mount("proc", "/proc", "proc", uintptr(defaultMountFlags), "")
 	path, err := exec.LookPath(cmdArray[0])
 	if err != nil {
 		log.Error(err.Error())
@@ -40,6 +38,9 @@ func RunContainerInitProcess() error {
 
 func readUserCommand() []string {
 	pipe := os.NewFile(uintptr(3), "pipe")
+
+	log.Debug("pipe Create")
+
 	msg, err := io.ReadAll(pipe)
 	if err != nil {
 		log.Error("init read pipe error:" + err.Error())

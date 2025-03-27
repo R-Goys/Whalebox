@@ -32,8 +32,11 @@ func Run(tty bool, cmdArray []string, resource *cgroup.ResourceConfig) {
 
 // 发信号给init进程，告诉它要执行的命令
 func sendInitCommand(cmdArray []string, pipe *os.File) {
+	defer pipe.Close()
 	commamd := strings.Join(cmdArray, " ")
 	log.Info(fmt.Sprintf("Sending command to container: %s", commamd))
-	pipe.WriteString(commamd)
-	pipe.Close()
+	if _, err := pipe.WriteString(commamd); err != nil {
+		log.Error("SendMsg Error: " + err.Error())
+	}
+	pipe.Sync()
 }
