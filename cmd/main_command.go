@@ -1,8 +1,6 @@
 package main
 
 import (
-	"fmt"
-
 	cgroup "github.com/R-Goys/Whalebox/cgroups"
 	"github.com/R-Goys/Whalebox/container"
 	"github.com/R-Goys/Whalebox/pkg/log"
@@ -20,8 +18,6 @@ var initCommand = cli.Command{
 
 func initAction(c *cli.Context) error {
 	log.Info("init command")
-	cmd := c.Args().Get(0)
-	log.Info(fmt.Sprintf("cmd is: %s", cmd))
 	err := container.RunContainerInitProcess()
 	if err != nil {
 		log.Error(err.Error())

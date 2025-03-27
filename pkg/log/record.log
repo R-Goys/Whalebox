@@ -1,5 +1,102 @@
-2025-03-26T21:35:35.402+0800	INFO	Starting Whalebox...
-2025-03-26T21:35:35.402+0800	INFO	New pipe: read: 6, write: 7
-2025-03-26T21:35:35.402+0800	INFO	Command: /proc/self/exe init
-2025-03-26T21:35:35.420+0800	DEBUG	cpu shares not set
-2025-03-26T21:35:35.420+0800	INFO	Sending command to container: /bin/sh
+2025-03-26T21:55:01.407+0800	INFO	Starting Whalebox...
+2025-03-26T21:55:01.407+0800	INFO	New pipe: read: 6, write: 7
+2025-03-26T21:55:01.407+0800	INFO	Command: /proc/self/exe init
+2025-03-26T21:55:01.420+0800	DEBUG	cpu shares not set
+2025-03-26T21:55:01.420+0800	INFO	Sending command to container: /bin/sh
+2025-03-26T21:55:01.420+0800	INFO	cgroup whalebox/60699 removed
+2025-03-26T21:55:08.795+0800	INFO	Starting Whalebox...
+2025-03-26T21:55:08.795+0800	INFO	New pipe: read: 6, write: 7
+2025-03-26T21:55:08.795+0800	INFO	Command: /proc/self/exe init
+2025-03-26T21:55:08.807+0800	DEBUG	cpu shares not set
+2025-03-26T21:55:08.807+0800	INFO	Sending command to container: /bin/sh
+2025-03-26T21:55:22.427+0800	INFO	Starting Whalebox...
+2025-03-26T21:55:22.427+0800	INFO	New pipe: read: 6, write: 7
+2025-03-26T21:55:22.427+0800	INFO	Command: /proc/self/exe init
+2025-03-26T21:55:22.438+0800	DEBUG	cpu shares not set
+2025-03-26T21:55:22.438+0800	INFO	Sending command to container: /bin/sh
+2025-03-26T21:55:25.778+0800	INFO	cgroup whalebox/61539 removed
+2025-03-27T13:37:14.214+0800	INFO	Starting Whalebox...
+2025-03-27T13:37:14.214+0800	INFO	New pipe: read: 6, write: 7
+2025-03-27T13:37:14.214+0800	INFO	Command: /proc/self/exe init
+2025-03-27T13:37:14.233+0800	DEBUG	cpu shares not set
+2025-03-27T13:37:14.233+0800	INFO	Sending command to container: /
+2025-03-27T13:37:14.234+0800	INFO	cgroup whalebox/74720 removed
+2025-03-27T13:37:17.913+0800	INFO	Starting Whalebox...
+2025-03-27T13:37:17.913+0800	INFO	New pipe: read: 6, write: 7
+2025-03-27T13:37:17.913+0800	INFO	Command: /proc/self/exe init
+2025-03-27T13:37:17.927+0800	DEBUG	cpu shares not set
+2025-03-27T13:37:17.927+0800	INFO	Sending command to container: ls
+2025-03-27T13:37:17.929+0800	INFO	cgroup whalebox/74753 removed
+2025-03-27T15:02:02.255+0800	INFO	Starting Whalebox...
+2025-03-27T15:02:02.255+0800	INFO	New pipe: read: 6, write: 7
+2025-03-27T15:02:02.255+0800	INFO	Command: /proc/self/exe init
+2025-03-27T15:02:02.273+0800	DEBUG	cpu shares not set
+2025-03-27T15:02:02.274+0800	INFO	Sending command to container: ls
+2025-03-27T15:02:02.276+0800	INFO	cgroup whalebox/78338 removed
+2025-03-27T15:02:49.975+0800	INFO	Starting Whalebox...
+2025-03-27T15:02:49.975+0800	INFO	New pipe: read: 6, write: 7
+2025-03-27T15:02:49.975+0800	INFO	Command: /proc/self/exe init
+2025-03-27T15:02:49.988+0800	DEBUG	cpu shares not set
+2025-03-27T15:02:49.988+0800	INFO	Sending command to container: ls
+2025-03-27T15:02:49.990+0800	INFO	cgroup whalebox/78919 removed
+2025-03-27T15:02:53.720+0800	INFO	Starting Whalebox...
+2025-03-27T15:02:53.720+0800	INFO	New pipe: read: 6, write: 7
+2025-03-27T15:02:53.720+0800	INFO	Command: /proc/self/exe init
+2025-03-27T15:02:53.740+0800	DEBUG	cpu shares not set
+2025-03-27T15:02:53.741+0800	INFO	Sending command to container: sh
+2025-03-27T15:03:03.474+0800	INFO	cgroup whalebox/78950 removed
+2025-03-27T15:03:26.169+0800	INFO	Starting Whalebox...
+2025-03-27T15:03:26.169+0800	INFO	New pipe: read: 6, write: 7
+2025-03-27T15:03:26.169+0800	INFO	Command: /proc/self/exe init
+2025-03-27T15:03:26.183+0800	DEBUG	cpu shares not set
+2025-03-27T15:03:26.184+0800	INFO	Sending command to container: sh
+2025-03-27T15:03:29.912+0800	INFO	cgroup whalebox/79395 removed
+2025-03-27T15:08:27.551+0800	INFO	Starting Whalebox...
+2025-03-27T15:08:27.551+0800	INFO	New pipe: read: 6, write: 7
+2025-03-27T15:08:27.551+0800	INFO	Command: /proc/self/exe init
+2025-03-27T15:08:27.555+0800	INFO	Starting Whalebox...
+2025-03-27T15:08:27.555+0800	INFO	init command
+2025-03-27T15:08:27.568+0800	DEBUG	cpu shares not set
+2025-03-27T15:08:27.568+0800	INFO	Sending command to container: sh
+2025-03-27T15:08:27.568+0800	INFO	Received command from parent: sh
+2025-03-27T15:08:27.569+0800	INFO	RunContainerInitProcess, cmd is: [sh]
+2025-03-27T15:08:27.569+0800	INFO	Find path: /usr/bin/sh
+2025-03-27T15:14:35.956+0800	INFO	cgroup whalebox/80110 removed
+2025-03-27T15:14:42.473+0800	INFO	Starting Whalebox...
+2025-03-27T15:14:42.473+0800	INFO	New pipe: read: 6, write: 7
+2025-03-27T15:14:42.473+0800	INFO	Command: /proc/self/exe init
+2025-03-27T15:14:42.476+0800	ERROR	fork/exec /proc/self/exe: no such file or directory
+2025-03-27T15:14:46.587+0800	INFO	Starting Whalebox...
+2025-03-27T15:14:46.588+0800	INFO	New pipe: read: 6, write: 7
+2025-03-27T15:14:46.588+0800	INFO	Command: /proc/self/exe init
+2025-03-27T15:14:46.589+0800	ERROR	fork/exec /proc/self/exe: no such file or directory
+2025-03-27T15:16:28.786+0800	INFO	Starting Whalebox...
+2025-03-27T15:16:28.786+0800	INFO	New pipe: read: 6, write: 7
+2025-03-27T15:16:28.786+0800	INFO	Command: /proc/self/exe init
+2025-03-27T15:16:28.790+0800	ERROR	fork/exec /proc/self/exe: no such file or directory
+2025-03-27T15:17:12.273+0800	INFO	Starting Whalebox...
+2025-03-27T15:17:12.273+0800	INFO	New pipe: read: 6, write: 7
+2025-03-27T15:17:12.273+0800	INFO	Command: /proc/self/exe init
+2025-03-27T15:17:12.274+0800	ERROR	fork/exec /proc/self/exe: no such file or directory
+2025-03-27T15:22:14.108+0800	INFO	Starting Whalebox...
+2025-03-27T15:22:14.108+0800	INFO	New pipe: read: 6, write: 7
+2025-03-27T15:22:14.108+0800	INFO	Command: /proc/self/exe init
+2025-03-27T15:22:14.112+0800	INFO	Starting Whalebox...
+2025-03-27T15:22:14.112+0800	INFO	init command
+2025-03-27T15:22:14.126+0800	DEBUG	cpu shares not set
+2025-03-27T15:22:14.126+0800	INFO	Sending command to container: sh
+2025-03-27T15:22:14.126+0800	INFO	Received command from parent: sh
+2025-03-27T15:22:14.126+0800	INFO	RunContainerInitProcess, cmd is: [sh]
+2025-03-27T15:22:14.126+0800	INFO	Find path: /usr/bin/sh
+2025-03-27T15:22:37.320+0800	INFO	Starting Whalebox...
+2025-03-27T15:22:37.320+0800	INFO	New pipe: read: 7, write: 8
+2025-03-27T15:22:37.320+0800	INFO	Command: /proc/self/exe init
+2025-03-27T15:22:37.324+0800	INFO	Starting Whalebox...
+2025-03-27T15:22:37.324+0800	INFO	init command
+2025-03-27T15:22:37.344+0800	DEBUG	cpu shares not set
+2025-03-27T15:22:37.345+0800	INFO	Sending command to container: sh
+2025-03-27T15:22:37.345+0800	INFO	Received command from parent: sh
+2025-03-27T15:22:37.345+0800	INFO	RunContainerInitProcess, cmd is: [sh]
+2025-03-27T15:22:37.345+0800	INFO	Find path: /usr/bin/sh
+2025-03-27T15:22:49.232+0800	INFO	cgroup whalebox/14 removed
+2025-03-27T15:22:59.109+0800	INFO	cgroup whalebox/4283 removed
