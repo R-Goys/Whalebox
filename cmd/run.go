@@ -27,6 +27,7 @@ func Run(tty bool, cmdArray []string, resource *cgroup.ResourceConfig) {
 	sendInitCommand(cmdArray, pipe)
 	parent.Wait()
 	cgroupManager.Remove()
+	container.DeleteWorkSpace("/home/rinai/PROJECTS/Whalebox/example/example3/", "/home/rinai/PROJECTS/Whalebox/example/example3/mnt/")
 	os.Exit(0)
 }
 
