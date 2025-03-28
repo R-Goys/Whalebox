@@ -9,7 +9,7 @@ import (
 	"github.com/R-Goys/Whalebox/pkg/log"
 )
 
-func NewParentProcess(tty bool) (*exec.Cmd, *os.File) {
+func NewParentProcess(tty bool, volume string) (*exec.Cmd, *os.File) {
 	readPipe, writePipe, err := NewPipe()
 	if err != nil {
 		log.Error("NewParentProcess: Failed to create pipe: " + err.Error())
@@ -42,9 +42,9 @@ func NewParentProcess(tty bool) (*exec.Cmd, *os.File) {
 		cmd.Stderr = os.Stderr
 	}
 	cmd.ExtraFiles = []*os.File{readPipe}
-	mntURL := "/home/rinai/PROJECTS/Whalebox/example/example3/mnt/"
+	mntURL := "/home/rinai/PROJECTS/Whalebox/example/example3/mnt"
 	rootURL := "/home/rinai/PROJECTS/Whalebox/example/example3/"
-	NewWorkSpace(rootURL, mntURL)
+	NewWorkSpace(rootURL, mntURL, volume)
 	cmd.Dir = mntURL
 	log.Info(fmt.Sprintf("Command: %v", cmd))
 	return cmd, writePipe

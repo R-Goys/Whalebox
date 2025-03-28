@@ -51,6 +51,10 @@ var runCommand = cli.Command{
 			Name:  "cpushare",
 			Usage: "Set CPU share for container",
 		},
+		&cli.StringFlag{
+			Name:  "v",
+			Usage: "Set volume for container",
+		},
 	},
 }
 
@@ -72,8 +76,9 @@ func runAction(c *cli.Context) error {
 		CpuShares:   c.String("cpushare"),
 		CpuSet:      c.String("cpuset"),
 	}
+	volume := c.String("v")
 	re, _ := json.Marshal(resource)
 	log.Debug(string(re))
-	Run(tty, cmdArray, resource)
+	Run(tty, cmdArray, resource, volume)
 	return nil
 }
