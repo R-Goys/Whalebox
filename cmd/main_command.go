@@ -1,15 +1,6 @@
 package main
 
 import (
-	"encoding/json"
-	"fmt"
-
-	cgroup "github.com/R-Goys/Whalebox/cgroups"
-	"github.com/R-Goys/Whalebox/container"
-	"github.com/R-Goys/Whalebox/pkg/log"
-
-	"errors"
-
 	"github.com/urfave/cli"
 )
 
@@ -17,16 +8,6 @@ var initCommand = cli.Command{
 	Name:   "init",
 	Usage:  "Init container process run user's process in container. Do not call it outside.",
 	Action: initAction,
-}
-
-func initAction(c *cli.Context) error {
-	log.Info("init command begin")
-	err := container.RunContainerInitProcess()
-	if err != nil {
-		log.Error(err.Error())
-		return err
-	}
-	return nil
 }
 
 var runCommand = cli.Command{
@@ -38,6 +19,10 @@ var runCommand = cli.Command{
 		&cli.BoolFlag{
 			Name:  "ti",
 			Usage: "enable tty",
+		},
+		&cli.BoolFlag{
+			Name:  "d",
+			Usage: "detach container",
 		},
 		&cli.StringFlag{
 			Name:  "m",
@@ -55,30 +40,21 @@ var runCommand = cli.Command{
 			Name:  "v",
 			Usage: "Set volume for container",
 		},
+		&cli.StringFlag{
+			Name:  "name",
+			Usage: "Set container name",
+		},
 	},
 }
 
-func runAction(c *cli.Context) error {
-	if len(c.Args()) < 1 {
-		log.Error("Please specify a container image name")
-		return errors.New("please specify a container image name")
-	}
-	var cmdArray []string
-	for i := 0; i < len(c.Args()); i++ {
-		log.Debug(fmt.Sprintf("Arg[%d]: %s", i, c.Args()[i]))
-		cmdArray = append(cmdArray, c.Args()[i])
-	}
-	//此处拿到第一条参数
-	//此处是获取-ti的参数
-	tty := c.Bool("ti")
-	resource := &cgroup.ResourceConfig{
-		MemoryLimit: c.String("m"),
-		CpuShares:   c.String("cpushare"),
-		CpuSet:      c.String("cpuset"),
-	}
-	volume := c.String("v")
-	re, _ := json.Marshal(resource)
-	log.Debug(string(re))
-	Run(tty, cmdArray, resource, volume)
-	return nil
+var commitCommand = cli.Command{
+	Name:   "commit",
+	Usage:  "Commit container changes to image",
+	Action: commitAction,
+}
+
+var listCommand = cli.Command{
+	Name:   "ps",
+	Usage:  "List all running containers",
+	Action: listAction,
 }

@@ -1,0 +1,110 @@
+2025-03-29T19:44:02.981+0800	INFO	Starting Whalebox...
+2025-03-29T19:44:02.981+0800	DEBUG	tty: true detch: true
+2025-03-29T19:44:02.981+0800	ERROR	Please specify only one of -ti and -d
+2025-03-29T19:44:02.981+0800	ERROR	please specify only one of -ti and -d
+2025-03-29T19:44:12.627+0800	INFO	Starting Whalebox...
+2025-03-29T19:44:12.627+0800	ERROR	Please specify a container image name
+2025-03-29T19:44:12.627+0800	ERROR	please specify a container image name
+2025-03-29T19:44:24.261+0800	INFO	Starting Whalebox...
+2025-03-29T19:44:24.261+0800	DEBUG	tty: true detch: true
+2025-03-29T19:44:24.261+0800	ERROR	Please specify only one of -ti and -d
+2025-03-29T19:44:24.261+0800	ERROR	please specify only one of -ti and -d
+2025-03-29T19:44:35.899+0800	INFO	Starting Whalebox...
+2025-03-29T19:44:35.899+0800	DEBUG	tty: false detch: true
+2025-03-29T19:44:35.899+0800	DEBUG	{"MemoryLimit":"","CpuShares":"","CpuSet":""}
+2025-03-29T19:44:35.899+0800	INFO	New pipe: read: 6, write: 7
+2025-03-29T19:44:35.899+0800	DEBUG	CreateMountPoint, Mkdir mntURL error: mkdir /home/rinai/PROJECTS/Whalebox/example/example3/mnt: file exists
+2025-03-29T19:44:35.899+0800	INFO	Command: /proc/self/exe init
+2025-03-29T19:44:35.901+0800	DEBUG	Record container info: {"pid":"85177","id":"zlLir0V4ygNy","name":"zlLir0V4ygNy","command":"sh","createTime":"2025-03-29 19:44:35","status":"running"}
+2025-03-29T19:44:35.903+0800	INFO	Starting Whalebox...
+2025-03-29T19:44:35.903+0800	INFO	init command begin
+2025-03-29T19:44:35.903+0800	DEBUG	pipe Create
+2025-03-29T19:44:35.919+0800	DEBUG	memory limit not set
+2025-03-29T19:44:35.919+0800	DEBUG	cpu shares not set
+2025-03-29T19:44:35.919+0800	DEBUG	cpuset not set
+2025-03-29T19:44:35.919+0800	INFO	Sending command to container: sh
+2025-03-29T19:44:35.919+0800	INFO	Received command from parent: sh
+2025-03-29T19:44:35.920+0800	INFO	RunContainerInitProcess, cmd is: [sh]
+2025-03-29T19:44:35.920+0800	INFO	Current directory: /home/rinai/PROJECTS/Whalebox/example/example3/mnt
+2025-03-29T19:44:35.920+0800	ERROR	pivotRoot: Failed to create pivot directory: mkdir /home/rinai/PROJECTS/Whalebox/example/example3/mnt/.pivot_root: no such file or directory
+2025-03-29T19:44:35.920+0800	INFO	Find path: /usr/bin/sh
+2025-03-29T19:45:23.779+0800	INFO	Starting Whalebox...
+2025-03-29T19:45:23.779+0800	DEBUG	tty: false detch: false
+2025-03-29T19:45:23.779+0800	DEBUG	{"MemoryLimit":"","CpuShares":"","CpuSet":""}
+2025-03-29T19:45:23.779+0800	INFO	New pipe: read: 6, write: 7
+2025-03-29T19:45:23.779+0800	DEBUG	CreateWriteLayer, Mkdir error: mkdir /home/rinai/PROJECTS/Whalebox/example/example3/writeLayer/: file exists
+2025-03-29T19:45:23.779+0800	DEBUG	CreateMountPoint, Mkdir mntURL error: mkdir /home/rinai/PROJECTS/Whalebox/example/example3/mnt: file exists
+2025-03-29T19:45:23.779+0800	INFO	Command: /proc/self/exe init
+2025-03-29T19:45:23.780+0800	DEBUG	Record container info: {"pid":"85620","id":"QcBPvNNnZPiN","name":"QcBPvNNnZPiN","command":"sh","createTime":"2025-03-29 19:45:23","status":"running"}
+2025-03-29T19:45:23.782+0800	INFO	Starting Whalebox...
+2025-03-29T19:45:23.782+0800	INFO	init command begin
+2025-03-29T19:45:23.782+0800	DEBUG	pipe Create
+2025-03-29T19:45:23.791+0800	DEBUG	memory limit not set
+2025-03-29T19:45:23.791+0800	DEBUG	cpu shares not set
+2025-03-29T19:45:23.791+0800	DEBUG	cpuset not set
+2025-03-29T19:45:23.791+0800	INFO	Sending command to container: sh
+2025-03-29T19:45:23.791+0800	INFO	Received command from parent: sh
+2025-03-29T19:45:23.791+0800	INFO	RunContainerInitProcess, cmd is: [sh]
+2025-03-29T19:45:23.791+0800	INFO	Current directory: /home/rinai/PROJECTS/Whalebox/example/example3/mnt
+2025-03-29T19:45:23.791+0800	ERROR	pivotRoot: Failed to create pivot directory: mkdir /home/rinai/PROJECTS/Whalebox/example/example3/mnt/.pivot_root: no such file or directory
+2025-03-29T19:45:23.791+0800	INFO	Find path: /usr/bin/sh
+2025-03-29T19:45:30.331+0800	INFO	Starting Whalebox...
+2025-03-29T19:45:30.331+0800	DEBUG	tty: true detch: false
+2025-03-29T19:45:30.331+0800	DEBUG	{"MemoryLimit":"","CpuShares":"","CpuSet":""}
+2025-03-29T19:45:30.331+0800	INFO	New pipe: read: 6, write: 7
+2025-03-29T19:45:30.331+0800	DEBUG	CreateWriteLayer, Mkdir error: mkdir /home/rinai/PROJECTS/Whalebox/example/example3/writeLayer/: file exists
+2025-03-29T19:45:30.331+0800	DEBUG	CreateMountPoint, Mkdir mntURL error: mkdir /home/rinai/PROJECTS/Whalebox/example/example3/mnt: file exists
+2025-03-29T19:45:30.331+0800	INFO	Command: /proc/self/exe init
+2025-03-29T19:45:30.332+0800	DEBUG	Record container info: {"pid":"85667","id":"hKwF51wrX41k","name":"hKwF51wrX41k","command":"sh","createTime":"2025-03-29 19:45:30","status":"running"}
+2025-03-29T19:45:30.334+0800	INFO	Starting Whalebox...
+2025-03-29T19:45:30.334+0800	INFO	init command begin
+2025-03-29T19:45:30.334+0800	DEBUG	pipe Create
+2025-03-29T19:45:30.341+0800	DEBUG	memory limit not set
+2025-03-29T19:45:30.341+0800	DEBUG	cpu shares not set
+2025-03-29T19:45:30.341+0800	DEBUG	cpuset not set
+2025-03-29T19:45:30.341+0800	INFO	Sending command to container: sh
+2025-03-29T19:45:30.341+0800	INFO	Received command from parent: sh
+2025-03-29T19:45:30.342+0800	INFO	RunContainerInitProcess, cmd is: [sh]
+2025-03-29T19:45:30.342+0800	INFO	Current directory: /home/rinai/PROJECTS/Whalebox/example/example3/mnt
+2025-03-29T19:45:30.342+0800	ERROR	pivotRoot: Failed to create pivot directory: mkdir /home/rinai/PROJECTS/Whalebox/example/example3/mnt/.pivot_root: no such file or directory
+2025-03-29T19:45:30.342+0800	INFO	Find path: /usr/bin/sh
+2025-03-29T19:45:48.710+0800	INFO	Starting Whalebox...
+2025-03-29T19:45:54.737+0800	INFO	cgroup whalebox/85667 removed
+2025-03-29T19:46:00.106+0800	INFO	Starting Whalebox...
+2025-03-29T20:34:55.086+0800	INFO	Starting Whalebox...
+2025-03-29T20:34:55.087+0800	DEBUG	tty: true detch: false
+2025-03-29T20:34:55.087+0800	DEBUG	{"MemoryLimit":"","CpuShares":"","CpuSet":""}
+2025-03-29T20:34:55.087+0800	INFO	New pipe: read: 6, write: 7
+2025-03-29T20:34:55.102+0800	INFO	Command: /proc/self/exe init
+2025-03-29T20:34:55.132+0800	DEBUG	Record container info: {"pid":"86242","id":"cUnwAXWBM0WX","name":"cUnwAXWBM0WX","command":"sh","createTime":"2025-03-29 20:34:55","status":"running"}
+2025-03-29T20:34:55.135+0800	INFO	Starting Whalebox...
+2025-03-29T20:34:55.135+0800	INFO	init command begin
+2025-03-29T20:34:55.135+0800	DEBUG	pipe Create
+2025-03-29T20:34:55.145+0800	DEBUG	memory limit not set
+2025-03-29T20:34:55.145+0800	DEBUG	cpu shares not set
+2025-03-29T20:34:55.145+0800	DEBUG	cpuset not set
+2025-03-29T20:34:55.145+0800	INFO	Sending command to container: sh
+2025-03-29T20:34:55.145+0800	INFO	Received command from parent: sh
+2025-03-29T20:34:55.145+0800	INFO	RunContainerInitProcess, cmd is: [sh]
+2025-03-29T20:34:55.145+0800	INFO	Current directory: /home/rinai/PROJECTS/Whalebox/example/example3/mnt
+2025-03-29T20:34:55.149+0800	INFO	Find path: /bin/sh
+2025-03-29T20:34:57.299+0800	INFO	cgroup whalebox/86242 removed
+2025-03-29T20:46:03.138+0800	INFO	Starting Whalebox...
+2025-03-29T20:46:03.138+0800	DEBUG	tty: true detch: false
+2025-03-29T20:46:03.138+0800	DEBUG	{"MemoryLimit":"","CpuShares":"","CpuSet":""}
+2025-03-29T20:46:03.138+0800	INFO	New pipe: read: 6, write: 7
+2025-03-29T20:46:03.142+0800	INFO	Command: /proc/self/exe init
+2025-03-29T20:46:03.154+0800	DEBUG	Record container info: {"pid":"87383","id":"X4u9IrrLcbZh","name":"X4u9IrrLcbZh","command":"sh","createTime":"2025-03-29 20:46:03","status":"running"}
+2025-03-29T20:46:03.157+0800	INFO	Starting Whalebox...
+2025-03-29T20:46:03.157+0800	INFO	init command begin
+2025-03-29T20:46:03.157+0800	DEBUG	pipe Create
+2025-03-29T20:46:03.173+0800	DEBUG	memory limit not set
+2025-03-29T20:46:03.173+0800	DEBUG	cpu shares not set
+2025-03-29T20:46:03.173+0800	DEBUG	cpuset not set
+2025-03-29T20:46:03.173+0800	INFO	Sending command to container: sh
+2025-03-29T20:46:03.173+0800	INFO	Received command from parent: sh
+2025-03-29T20:46:03.174+0800	INFO	RunContainerInitProcess, cmd is: [sh]
+2025-03-29T20:46:03.174+0800	INFO	Current directory: /home/rinai/PROJECTS/Whalebox/example/example3/mnt
+2025-03-29T20:46:03.177+0800	INFO	Find path: /bin/sh
+2025-03-29T20:46:04.862+0800	INFO	removing cgroup whalebox/87383
+2025-03-29T20:46:04.862+0800	INFO	cgroup whalebox/87383 removed

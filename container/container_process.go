@@ -6,7 +6,25 @@ import (
 	"os/exec"
 	"syscall"
 
+	Common "github.com/R-Goys/Whalebox/common"
 	"github.com/R-Goys/Whalebox/pkg/log"
+)
+
+type Container struct {
+	Pid        string `json:"pid"`
+	Id         string `json:"id"`
+	Name       string `json:"name"`
+	Command    string `json:"command"`
+	CreateTime string `json:"createTime"`
+	Status     string `json:"status"`
+}
+
+var (
+	RUNNING             = "running"
+	STOPPED             = "stopped"
+	EXIT                = "exited"
+	DEFAULTINFOLOCATION = "/home/rinai/PROJECTS/Whalebox/example/example4/%s/"
+	CONFIGNAME          = "config.json"
 )
 
 func NewParentProcess(tty bool, volume string) (*exec.Cmd, *os.File) {
@@ -42,10 +60,9 @@ func NewParentProcess(tty bool, volume string) (*exec.Cmd, *os.File) {
 		cmd.Stderr = os.Stderr
 	}
 	cmd.ExtraFiles = []*os.File{readPipe}
-	mntURL := "/home/rinai/PROJECTS/Whalebox/example/example3/mnt"
-	rootURL := "/home/rinai/PROJECTS/Whalebox/example/example3/"
-	NewWorkSpace(rootURL, mntURL, volume)
-	cmd.Dir = mntURL
+
+	NewWorkSpace(Common.RootPath, Common.MntPath, volume)
+	cmd.Dir = Common.MntPath
 	log.Info(fmt.Sprintf("Command: %v", cmd))
 	return cmd, writePipe
 }
