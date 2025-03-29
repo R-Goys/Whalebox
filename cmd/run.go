@@ -16,7 +16,7 @@ import (
 )
 
 func Run(tty bool, cmdArray []string, resource *cgroup.ResourceConfig, volume, containerName string) {
-	parent, pipe := container.NewParentProcess(tty, volume)
+	parent, pipe := container.NewParentProcess(tty, volume, containerName)
 	if parent == nil {
 		log.Error("Failed to create parent process")
 		return

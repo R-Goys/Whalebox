@@ -58,3 +58,9 @@ var listCommand = cli.Command{
 	Usage:  "List all running containers",
 	Action: listAction,
 }
+
+var logCommand = cli.Command{
+	Name:   "logs",
+	Usage:  "Show container logs",
+	Action: logAction,
+}

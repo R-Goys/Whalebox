@@ -68,3 +68,13 @@ func listAction(c *cli.Context) error {
 	listContainers()
 	return nil
 }
+
+func logAction(c *cli.Context) error {
+	if len(c.Args()) == 0 {
+		log.Error("please provide a containerName to log")
+		return fmt.Errorf("please provide a containerName to log")
+	}
+	containerName := c.Args()[0]
+	logContainer(containerName)
+	return nil
+}

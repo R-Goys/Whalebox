@@ -25,9 +25,10 @@ var (
 	EXIT                = "exited"
 	DEFAULTINFOLOCATION = "/home/rinai/PROJECTS/Whalebox/example/example4/%s/"
 	CONFIGNAME          = "config.json"
+	CONTAINERLOGFILE    = "container.log"
 )
 
-func NewParentProcess(tty bool, volume string) (*exec.Cmd, *os.File) {
+func NewParentProcess(tty bool, volume, containerName string) (*exec.Cmd, *os.File) {
 	readPipe, writePipe, err := NewPipe()
 	if err != nil {
 		log.Error("NewParentProcess: Failed to create pipe: " + err.Error())
@@ -58,6 +59,19 @@ func NewParentProcess(tty bool, volume string) (*exec.Cmd, *os.File) {
 		cmd.Stdin = os.Stdin
 		cmd.Stdout = os.Stdout
 		cmd.Stderr = os.Stderr
+	} else {
+		dirURL := fmt.Sprintf(DEFAULTINFOLOCATION, containerName)
+		if err := os.MkdirAll(dirURL, 0622); err != nil {
+			log.Error("NewParentProcess: Failed to create directory: " + err.Error())
+			return nil, nil
+		}
+		stdLogFilePath := dirURL + CONTAINERLOGFILE
+		stdLogFile, err := os.Create(stdLogFilePath)
+		if err != nil {
+			log.Error("NewParentProcess: Failed to create log file: " + err.Error())
+			return nil, nil
+		}
+		cmd.Stdout = stdLogFile
 	}
 	cmd.ExtraFiles = []*os.File{readPipe}
 
