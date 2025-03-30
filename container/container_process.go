@@ -14,6 +14,7 @@ type Container struct {
 	Pid        string `json:"pid"`
 	Id         string `json:"id"`
 	Name       string `json:"name"`
+	Volume     string `json:"volume"`
 	Command    string `json:"command"`
 	CreateTime string `json:"createTime"`
 	Status     string `json:"status"`

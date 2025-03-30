@@ -152,3 +152,9 @@ func (s *Cgroup) SetCpuLimit(resources *ResourceConfig) error {
 		return fmt.Errorf("failed to get cgroup path: %v", err)
 	}
 }
+
+func GetCgroup(Root, pid string) *Cgroup {
+	return &Cgroup{
+		path: Root + "/" + pid,
+	}
+}

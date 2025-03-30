@@ -26,7 +26,7 @@ func Run(tty bool, cmdArray []string, resource *cgroup.ResourceConfig, volume, c
 		return
 	}
 	fmt.Println("Container started, pid: ", parent.Process.Pid)
-	containerName, err := RecordContainerInfo(parent.Process.Pid, cmdArray, containerName)
+	containerName, err := RecordContainerInfo(parent.Process.Pid, cmdArray, containerName, volume)
 	if err != nil {
 		log.Error("Record container info error" + err.Error())
 		return
@@ -64,7 +64,7 @@ func randStringBytes(n int) string {
 	return string(b)
 }
 
-func RecordContainerInfo(ContainerPID int, commandArray []string, containerName string) (string, error) {
+func RecordContainerInfo(ContainerPID int, commandArray []string, containerName, volume string) (string, error) {
 	id := randStringBytes(12)
 	createTime := time.Now().Format("2006-01-02 15:04:05")
 	if containerName == "" {
@@ -75,6 +75,7 @@ func RecordContainerInfo(ContainerPID int, commandArray []string, containerName 
 		Id:         id,
 		Name:       containerName,
 		Pid:        strconv.Itoa(ContainerPID),
+		Volume:     volume,
 		Command:    command,
 		CreateTime: createTime,
 		Status:     "running",

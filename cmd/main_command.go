@@ -64,3 +64,21 @@ var logCommand = cli.Command{
 	Usage:  "Show container logs",
 	Action: logAction,
 }
+
+var execCommand = cli.Command{
+	Name:   "exec",
+	Usage:  "Run a command in a running container",
+	Action: execAction,
+}
+
+var stopCommand = cli.Command{
+	Name:   "stop",
+	Usage:  "Stop a running container",
+	Action: stopAction,
+}
+
+var removeCommand = cli.Command{
+	Name:   "rm",
+	Usage:  "Remove a container",
+	Action: removeAction,
+}

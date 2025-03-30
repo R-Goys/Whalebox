@@ -4,9 +4,11 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"os"
 	"strconv"
 
 	cgroup "github.com/R-Goys/Whalebox/cgroups"
+	Common "github.com/R-Goys/Whalebox/common"
 	"github.com/R-Goys/Whalebox/container"
 	"github.com/R-Goys/Whalebox/pkg/log"
 	"github.com/urfave/cli"
@@ -76,5 +78,44 @@ func logAction(c *cli.Context) error {
 	}
 	containerName := c.Args()[0]
 	logContainer(containerName)
+	return nil
+}
+
+func execAction(c *cli.Context) error {
+	if os.Getenv(Common.ENV_EXEC_PID) != "" {
+		log.Info("pid callback pid: " + strconv.Itoa(os.Getegid()))
+		return nil
+	}
+	if len(c.Args()) < 2 {
+		log.Error("Please specify a container name and command to execute")
+		return errors.New("please specify a container name and command to execute")
+	}
+	containerName := c.Args().Get(0)
+	var cmdArray []string
+	for _, arg := range c.Args()[1:] {
+		cmdArray = append(cmdArray, arg)
+	}
+	log.Debug("exec containerName: " + containerName + " cmdArray: " + fmt.Sprintf("%v", cmdArray))
+	execContainer(containerName, cmdArray)
+	return nil
+}
+
+func stopAction(c *cli.Context) error {
+	if len(c.Args()) < 1 {
+		log.Error("Please specify a container name to stop")
+		return errors.New("please specify a container name to stop")
+	}
+	containerName := c.Args().Get(0)
+	stopContainer(containerName)
+	return nil
+}
+
+func removeAction(c *cli.Context) error {
+	if len(c.Args()) < 1 {
+		log.Error("Please specify a container name to remove")
+		return errors.New("please specify a container name to remove")
+	}
+	containerName := c.Args().Get(0)
+	removeContainer(containerName)
 	return nil
 }
