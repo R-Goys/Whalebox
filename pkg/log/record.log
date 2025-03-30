@@ -12,3 +12,147 @@
 2025-03-30T18:27:41.269+0800	INFO	cgroup whalebox/56301 removed
 2025-03-30T18:27:41.269+0800	INFO	Container removed successfully
 2025-03-30T18:28:15.708+0800	INFO	Starting Whalebox...
+2025-03-30T18:35:38.516+0800	INFO	Starting Whalebox...
+2025-03-30T18:35:38.516+0800	DEBUG	tty: false detch: true
+2025-03-30T18:35:38.516+0800	DEBUG	{"MemoryLimit":"","CpuShares":"","CpuSet":""}
+2025-03-30T18:35:38.516+0800	INFO	New pipe: read: 6, write: 7
+2025-03-30T18:35:38.517+0800	DEBUG	CreateMountPoint, mount command: /usr/bin/mount -t overlay overlay -o lowerdir=/home/rinai/PROJECTS/Whalebox/example/example3/busybox,upperdir=/home/rinai/PROJECTS/Whalebox/example/example3/writeLayer/container1,workdir=/home/rinai/PROJECTS/Whalebox/example/example3/workDir/container1 /home/rinai/PROJECTS/Whalebox/example/example3/mnt/container1
+2025-03-30T18:35:38.518+0800	INFO	MountVolume, Mkdir parentURL error: mkdir /home/rinai/PROJECTS/Whalebox/example/volume: file exists
+2025-03-30T18:35:38.519+0800	DEBUG	MountVolume, parentURL: /home/rinai/PROJECTS/Whalebox/example/volume, containerURL: /home/rinai/PROJECTS/Whalebox/example/example3/mnt/container1/volume
+2025-03-30T18:35:38.520+0800	INFO	Mount volume: [/home/rinai/PROJECTS/Whalebox/example/volume volume]
+2025-03-30T18:35:38.520+0800	INFO	Command: /proc/self/exe init
+2025-03-30T18:35:38.521+0800	DEBUG	Record container info: {"pid":"5204","id":"B7fIfIfWfLX3","name":"container1","volume":"/home/rinai/PROJECTS/Whalebox/example/volume:volume","imageName":"busybox","command":"top","createTime":"2025-03-30 18:35:38","status":"running"}
+2025-03-30T18:35:38.523+0800	INFO	Starting Whalebox...
+2025-03-30T18:35:38.523+0800	INFO	init command begin
+2025-03-30T18:35:38.523+0800	DEBUG	pipe Create
+2025-03-30T18:35:38.531+0800	DEBUG	memory limit not set
+2025-03-30T18:35:38.531+0800	DEBUG	cpu shares not set
+2025-03-30T18:35:38.531+0800	DEBUG	cpuset not set
+2025-03-30T18:35:38.531+0800	INFO	Sending command to container: top
+2025-03-30T18:35:38.531+0800	INFO	Received command from parent: top
+2025-03-30T18:35:38.531+0800	INFO	RunContainerInitProcess, cmd is: [top]
+2025-03-30T18:35:38.531+0800	INFO	Current directory: /home/rinai/PROJECTS/Whalebox/example/example3/mnt/container1
+2025-03-30T18:35:38.532+0800	INFO	Find path: /bin/top
+2025-03-30T18:35:52.267+0800	INFO	Starting Whalebox...
+2025-03-30T18:35:52.267+0800	INFO	container1 Container %s stopped
+2025-03-30T18:35:58.275+0800	INFO	Starting Whalebox...
+2025-03-30T18:35:58.287+0800	INFO	removing cgroup whalebox/5204
+2025-03-30T18:35:58.287+0800	INFO	cgroup whalebox/5204 removed
+2025-03-30T18:35:58.287+0800	INFO	Container removed successfully
+2025-03-30T18:36:02.844+0800	INFO	Starting Whalebox...
+2025-03-30T18:50:37.737+0800	INFO	Starting Whalebox...
+2025-03-30T18:50:37.737+0800	DEBUG	tty: false detch: true
+2025-03-30T18:50:37.737+0800	DEBUG	{"MemoryLimit":"","CpuShares":"","CpuSet":""}
+2025-03-30T18:50:37.737+0800	INFO	New pipe: read: 6, write: 7
+2025-03-30T18:50:37.737+0800	DEBUG	CreateMountPoint, mount command: /usr/bin/mount -t overlay overlay -o lowerdir=/home/rinai/PROJECTS/Whalebox/example/example3/busybox,upperdir=/home/rinai/PROJECTS/Whalebox/example/example3/writeLayer/container1,workdir=/home/rinai/PROJECTS/Whalebox/example/example3/workDir/container1 /home/rinai/PROJECTS/Whalebox/example/example3/mnt/container1
+2025-03-30T18:50:37.739+0800	INFO	MountVolume, Mkdir parentURL error: mkdir /home/rinai/PROJECTS/Whalebox/example/volume: file exists
+2025-03-30T18:50:37.739+0800	DEBUG	MountVolume, parentURL: /home/rinai/PROJECTS/Whalebox/example/volume, containerURL: /home/rinai/PROJECTS/Whalebox/example/example3/mnt/container1/volume
+2025-03-30T18:50:37.740+0800	INFO	Mount volume: [/home/rinai/PROJECTS/Whalebox/example/volume volume]
+2025-03-30T18:50:37.740+0800	INFO	Command: /proc/self/exe init
+2025-03-30T18:50:37.742+0800	DEBUG	Record container info: {"pid":"6873","id":"rpI17hkGE8gr","name":"container1","volume":"/home/rinai/PROJECTS/Whalebox/example/volume:volume","imageName":"busybox","command":"top","createTime":"2025-03-30 18:50:37","status":"running"}
+2025-03-30T18:50:37.745+0800	INFO	Starting Whalebox...
+2025-03-30T18:50:37.745+0800	INFO	init command begin
+2025-03-30T18:50:37.745+0800	DEBUG	pipe Create
+2025-03-30T18:50:37.757+0800	DEBUG	memory limit not set
+2025-03-30T18:50:37.757+0800	DEBUG	cpu shares not set
+2025-03-30T18:50:37.757+0800	DEBUG	cpuset not set
+2025-03-30T18:50:37.757+0800	INFO	Sending command to container: top
+2025-03-30T18:50:37.757+0800	INFO	Received command from parent: top
+2025-03-30T18:50:37.757+0800	INFO	RunContainerInitProcess, cmd is: [top]
+2025-03-30T18:50:37.757+0800	INFO	Current directory: /home/rinai/PROJECTS/Whalebox/example/example3/mnt/container1
+2025-03-30T18:50:37.758+0800	INFO	Find path: /bin/top
+2025-03-30T18:50:43.127+0800	INFO	Starting Whalebox...
+2025-03-30T18:50:43.128+0800	INFO	container1 Container %s stopped
+2025-03-30T18:50:46.032+0800	INFO	Starting Whalebox...
+2025-03-30T18:50:46.040+0800	INFO	removing cgroup whalebox/6873
+2025-03-30T18:50:46.040+0800	INFO	cgroup whalebox/6873 removed
+2025-03-30T18:50:46.040+0800	INFO	Container removed successfully
+2025-03-30T18:50:49.344+0800	INFO	Starting Whalebox...
+2025-03-30T19:41:47.740+0800	INFO	Starting Whalebox...
+2025-03-30T19:41:47.741+0800	DEBUG	tty: false detch: true
+2025-03-30T19:41:47.741+0800	DEBUG	{"MemoryLimit":"","CpuShares":"","CpuSet":""}
+2025-03-30T19:41:47.741+0800	INFO	New pipe: read: 6, write: 7
+2025-03-30T19:41:47.741+0800	DEBUG	CreateMountPoint, mount command: /usr/bin/mount -t overlay overlay -o lowerdir=/home/rinai/PROJECTS/Whalebox/example/example3/busybox,upperdir=/home/rinai/PROJECTS/Whalebox/example/example3/writeLayer/container1,workdir=/home/rinai/PROJECTS/Whalebox/example/example3/workDir/container1 /home/rinai/PROJECTS/Whalebox/example/example3/mnt/container1
+2025-03-30T19:41:47.743+0800	INFO	MountVolume, Mkdir parentURL error: mkdir /home/rinai/PROJECTS/Whalebox/example/volume: file exists
+2025-03-30T19:41:47.743+0800	DEBUG	MountVolume, parentURL: /home/rinai/PROJECTS/Whalebox/example/volume, containerURL: /home/rinai/PROJECTS/Whalebox/example/example3/mnt/container1/volume
+2025-03-30T19:41:47.744+0800	INFO	Mount volume: [/home/rinai/PROJECTS/Whalebox/example/volume volume]
+2025-03-30T19:41:47.744+0800	INFO	Command: /proc/self/exe init
+2025-03-30T19:41:47.745+0800	DEBUG	Record container info: {"pid":"7437","id":"ZN9Dj2xSg0np","name":"container1","volume":"/home/rinai/PROJECTS/Whalebox/example/volume:volume","imageName":"busybox","command":"top","createTime":"2025-03-30 19:41:47","status":"running"}
+2025-03-30T19:41:47.748+0800	INFO	Starting Whalebox...
+2025-03-30T19:41:47.748+0800	INFO	init command begin
+2025-03-30T19:41:47.748+0800	DEBUG	pipe Create
+2025-03-30T19:41:47.757+0800	DEBUG	memory limit not set
+2025-03-30T19:41:47.757+0800	DEBUG	cpu shares not set
+2025-03-30T19:41:47.757+0800	DEBUG	cpuset not set
+2025-03-30T19:41:47.757+0800	INFO	Sending command to container: top
+2025-03-30T19:41:47.757+0800	INFO	Received command from parent: top
+2025-03-30T19:41:47.757+0800	INFO	RunContainerInitProcess, cmd is: [top]
+2025-03-30T19:41:47.757+0800	INFO	Current directory: /home/rinai/PROJECTS/Whalebox/example/example3/mnt/container1
+2025-03-30T19:41:47.758+0800	INFO	Find path: /bin/top
+2025-03-30T19:41:52.977+0800	INFO	Starting Whalebox...
+2025-03-30T19:42:33.861+0800	INFO	Starting Whalebox...
+2025-03-30T19:42:33.861+0800	ERROR	Please specify a container name and command to execute
+2025-03-30T19:42:33.861+0800	ERROR	please specify a container name and command to execute
+2025-03-30T19:42:38.451+0800	INFO	Starting Whalebox...
+2025-03-30T19:42:38.451+0800	DEBUG	exec containerName: container1 cmdArray: [sh]
+2025-03-30T19:42:38.451+0800	INFO	Executing command in container container1 : sh
+2025-03-30T19:45:59.316+0800	INFO	Starting Whalebox...
+2025-03-30T19:45:59.316+0800	INFO	Committing container image123 to /home/rinai/PROJECTS/Whalebox/example/example3/image123.tar
+2025-03-30T19:46:39.727+0800	INFO	Starting Whalebox...
+2025-03-30T19:46:39.728+0800	DEBUG	tty: false detch: true
+2025-03-30T19:46:39.728+0800	DEBUG	{"MemoryLimit":"","CpuShares":"","CpuSet":""}
+2025-03-30T19:46:39.728+0800	INFO	New pipe: read: 6, write: 7
+2025-03-30T19:46:39.762+0800	DEBUG	CreateMountPoint, mount command: /usr/bin/mount -t overlay overlay -o lowerdir=/home/rinai/PROJECTS/Whalebox/example/example3/image123,upperdir=/home/rinai/PROJECTS/Whalebox/example/example3/writeLayer/container123,workdir=/home/rinai/PROJECTS/Whalebox/example/example3/workDir/container123 /home/rinai/PROJECTS/Whalebox/example/example3/mnt/container123
+2025-03-30T19:46:39.764+0800	INFO	Command: /proc/self/exe init
+2025-03-30T19:46:39.766+0800	DEBUG	Record container info: {"pid":"8436","id":"hTJ6UNPhOivT","name":"container123","volume":"","imageName":"image123","command":"sh","createTime":"2025-03-30 19:46:39","status":"running"}
+2025-03-30T19:46:39.768+0800	INFO	Starting Whalebox...
+2025-03-30T19:46:39.768+0800	INFO	init command begin
+2025-03-30T19:46:39.768+0800	DEBUG	pipe Create
+2025-03-30T19:46:39.777+0800	DEBUG	memory limit not set
+2025-03-30T19:46:39.777+0800	DEBUG	cpu shares not set
+2025-03-30T19:46:39.777+0800	DEBUG	cpuset not set
+2025-03-30T19:46:39.777+0800	INFO	Sending command to container: sh
+2025-03-30T19:46:39.777+0800	INFO	Received command from parent: sh
+2025-03-30T19:46:39.777+0800	INFO	RunContainerInitProcess, cmd is: [sh]
+2025-03-30T19:46:39.777+0800	INFO	Current directory: /home/rinai/PROJECTS/Whalebox/example/example3/mnt/container123
+2025-03-30T19:46:39.777+0800	INFO	Find path: /bin/sh
+2025-03-30T19:46:43.959+0800	INFO	Starting Whalebox...
+2025-03-30T19:47:01.308+0800	INFO	Starting Whalebox...
+2025-03-30T19:47:01.308+0800	DEBUG	tty: false detch: true
+2025-03-30T19:47:01.308+0800	DEBUG	{"MemoryLimit":"","CpuShares":"","CpuSet":""}
+2025-03-30T19:47:01.308+0800	INFO	New pipe: read: 6, write: 7
+2025-03-30T19:47:01.308+0800	DEBUG	CreateMountPoint, mount command: /usr/bin/mount -t overlay overlay -o lowerdir=/home/rinai/PROJECTS/Whalebox/example/example3/image123,upperdir=/home/rinai/PROJECTS/Whalebox/example/example3/writeLayer/container12,workdir=/home/rinai/PROJECTS/Whalebox/example/example3/workDir/container12 /home/rinai/PROJECTS/Whalebox/example/example3/mnt/container12
+2025-03-30T19:47:01.310+0800	INFO	Command: /proc/self/exe init
+2025-03-30T19:47:01.311+0800	DEBUG	Record container info: {"pid":"8528","id":"lEdXekc15SFV","name":"container12","volume":"","imageName":"image123","command":"top","createTime":"2025-03-30 19:47:01","status":"running"}
+2025-03-30T19:47:01.313+0800	INFO	Starting Whalebox...
+2025-03-30T19:47:01.313+0800	INFO	init command begin
+2025-03-30T19:47:01.313+0800	DEBUG	pipe Create
+2025-03-30T19:47:01.329+0800	DEBUG	memory limit not set
+2025-03-30T19:47:01.329+0800	DEBUG	cpu shares not set
+2025-03-30T19:47:01.329+0800	DEBUG	cpuset not set
+2025-03-30T19:47:01.329+0800	INFO	Sending command to container: top
+2025-03-30T19:47:01.329+0800	INFO	Received command from parent: top
+2025-03-30T19:47:01.329+0800	INFO	RunContainerInitProcess, cmd is: [top]
+2025-03-30T19:47:01.329+0800	INFO	Current directory: /home/rinai/PROJECTS/Whalebox/example/example3/mnt/container12
+2025-03-30T19:47:01.330+0800	INFO	Find path: /bin/top
+2025-03-30T19:47:16.409+0800	INFO	Starting Whalebox...
+2025-03-30T19:47:16.409+0800	ERROR	Please specify a container name and command to execute
+2025-03-30T19:47:16.409+0800	ERROR	please specify a container name and command to execute
+2025-03-30T19:48:16.087+0800	INFO	Starting Whalebox...
+2025-03-30T19:48:16.087+0800	DEBUG	exec containerName: container12 cmdArray: [sh]
+2025-03-30T19:48:16.087+0800	INFO	Executing command in container container12 : sh
+2025-03-30T19:53:35.878+0800	INFO	Starting Whalebox...
+2025-03-30T19:53:45.592+0800	INFO	Starting Whalebox...
+2025-03-30T19:53:45.592+0800	INFO	container1 Container %s stopped
+2025-03-30T19:53:51.164+0800	INFO	Starting Whalebox...
+2025-03-30T19:53:56.984+0800	INFO	Starting Whalebox...
+2025-03-30T19:53:56.985+0800	INFO	container12 Container %s stopped
+2025-03-30T19:54:07.825+0800	INFO	Starting Whalebox...
+2025-03-30T19:54:07.851+0800	INFO	removing cgroup whalebox/7437
+2025-03-30T19:54:07.852+0800	INFO	cgroup whalebox/7437 removed
+2025-03-30T19:54:07.852+0800	INFO	Container removed successfully
+2025-03-30T19:54:08.939+0800	INFO	Starting Whalebox...
+2025-03-30T19:54:08.953+0800	INFO	removing cgroup whalebox/8528
+2025-03-30T19:54:08.954+0800	INFO	cgroup whalebox/8528 removed
+2025-03-30T19:54:08.954+0800	INFO	Container removed successfully
+2025-03-30T19:54:12.176+0800	INFO	Starting Whalebox...

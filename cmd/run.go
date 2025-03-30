@@ -36,7 +36,7 @@ func Run(tty bool, cmdArray []string, resource *cgroup.ResourceConfig, volume, c
 	if tty {
 		parent.Wait()
 		deleteContainerInfo(containerName)
-		container.DeleteWorkSpace(containerName, volume, imageName)
+		container.DeleteWorkSpace(containerName, volume)
 		cgroupManager.Remove()
 	}
 	os.Exit(0)

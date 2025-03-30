@@ -21,7 +21,7 @@ func removeContainer(containerName string) error {
 	cgroupManager := cgroup.GetCgroup("whalebox", containerInfo.Pid)
 	volume := containerInfo.Volume
 	deleteContainerInfo(containerName)
-	container.DeleteWorkSpace(containerName, volume, containerInfo.ImageName)
+	container.DeleteWorkSpace(containerName, volume)
 	cgroupManager.Remove()
 	log.Info("Container removed successfully")
 	return nil

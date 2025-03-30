@@ -80,7 +80,7 @@ func PathExists(path string) (bool, error) {
 	return false, err
 }
 
-func DeleteWorkSpace(containerName, volume, imageName string) {
+func DeleteWorkSpace(containerName, volume string) {
 	if volume != "" {
 		volumeURLs := volumeUrlExtract(volume)
 		if len(volumeURLs) == 2 && volumeURLs[0] != "" && volumeURLs[1] != "" {
