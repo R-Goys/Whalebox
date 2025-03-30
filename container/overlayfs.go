@@ -38,6 +38,7 @@ func CreateWriteLayer(containerName string) {
 
 func CreateMountPoint(containerName string, imageName string) {
 	mntURL := fmt.Sprintf(Common.MntPath, containerName)
+	log.Debug("CreateMountPoint, mntURL: " + mntURL)
 	if err := os.MkdirAll(mntURL, 0777); err != nil {
 		log.Debug("CreateMountPoint, Mkdir mntURL error: " + err.Error())
 		return
