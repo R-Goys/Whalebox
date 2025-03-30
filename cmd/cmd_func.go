@@ -50,19 +50,22 @@ func runAction(c *cli.Context) error {
 	}
 	volume := c.String("v")
 	containerName := c.String("name")
+	imageName := cmdArray[0]
+	cmdArray = cmdArray[1:]
 	re, _ := json.Marshal(resource)
 	log.Debug(string(re))
-	Run(tty, cmdArray, resource, volume, containerName)
+	Run(tty, cmdArray, resource, volume, containerName, imageName)
 	return nil
 }
 
 func commitAction(c *cli.Context) error {
-	if len(c.Args()) < 1 {
-		log.Error("-Commit: Please specify a container name")
-		return errors.New("please specify a container name")
+	if len(c.Args()) < 2 {
+		log.Error("-Commit: Please specify a container name and image name")
+		return errors.New("please specify a container name and image name")
 	}
-	imageName := c.Args()[0]
-	commitContainer(imageName)
+	containerName := c.Args().Get(0)
+	imageName := c.Args().Get(1)
+	commitContainer(containerName, imageName)
 	return nil
 }
 
@@ -76,7 +79,7 @@ func logAction(c *cli.Context) error {
 		log.Error("please provide a containerName to log")
 		return fmt.Errorf("please provide a containerName to log")
 	}
-	containerName := c.Args()[0]
+	containerName := c.Args().Get(0)
 	logContainer(containerName)
 	return nil
 }

@@ -10,13 +10,12 @@ import (
 	"time"
 
 	cgroup "github.com/R-Goys/Whalebox/cgroups"
-	Common "github.com/R-Goys/Whalebox/common"
 	"github.com/R-Goys/Whalebox/container"
 	"github.com/R-Goys/Whalebox/pkg/log"
 )
 
-func Run(tty bool, cmdArray []string, resource *cgroup.ResourceConfig, volume, containerName string) {
-	parent, pipe := container.NewParentProcess(tty, volume, containerName)
+func Run(tty bool, cmdArray []string, resource *cgroup.ResourceConfig, volume, containerName, imageName string) {
+	parent, pipe := container.NewParentProcess(tty, volume, containerName, imageName)
 	if parent == nil {
 		log.Error("Failed to create parent process")
 		return
@@ -26,7 +25,7 @@ func Run(tty bool, cmdArray []string, resource *cgroup.ResourceConfig, volume, c
 		return
 	}
 	fmt.Println("Container started, pid: ", parent.Process.Pid)
-	containerName, err := RecordContainerInfo(parent.Process.Pid, cmdArray, containerName, volume)
+	containerName, err := RecordContainerInfo(parent.Process.Pid, cmdArray, containerName, volume, imageName)
 	if err != nil {
 		log.Error("Record container info error" + err.Error())
 		return
@@ -37,7 +36,7 @@ func Run(tty bool, cmdArray []string, resource *cgroup.ResourceConfig, volume, c
 	if tty {
 		parent.Wait()
 		deleteContainerInfo(containerName)
-		container.DeleteWorkSpace(Common.RootPath, Common.MntPath, volume)
+		container.DeleteWorkSpace(containerName, volume, imageName)
 		cgroupManager.Remove()
 	}
 	os.Exit(0)
@@ -64,7 +63,7 @@ func randStringBytes(n int) string {
 	return string(b)
 }
 
-func RecordContainerInfo(ContainerPID int, commandArray []string, containerName, volume string) (string, error) {
+func RecordContainerInfo(ContainerPID int, commandArray []string, containerName, volume, imageName string) (string, error) {
 	id := randStringBytes(12)
 	createTime := time.Now().Format("2006-01-02 15:04:05")
 	if containerName == "" {
@@ -76,6 +75,7 @@ func RecordContainerInfo(ContainerPID int, commandArray []string, containerName,
 		Name:       containerName,
 		Pid:        strconv.Itoa(ContainerPID),
 		Volume:     volume,
+		ImageName:  imageName,
 		Command:    command,
 		CreateTime: createTime,
 		Status:     "running",

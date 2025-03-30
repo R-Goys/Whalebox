@@ -1,60 +1,66 @@
 package container
 
 import (
+	"fmt"
 	"os"
 	"os/exec"
 	"strings"
 
+	Common "github.com/R-Goys/Whalebox/common"
 	"github.com/R-Goys/Whalebox/pkg/log"
 )
 
-func CreateReadOnlyLayer(RootURL string) {
-	busyboxURL := RootURL + "busybox/"
-	busyboxTarURL := RootURL + "busybox.tar"
-	exist, err := PathExists(busyboxURL)
+func CreateReadOnlyLayer(imageName string) {
+	unTarFolderURL := Common.RootPath + "/" + imageName + "/"
+	imageURL := Common.RootPath + "/" + imageName + ".tar"
+	exist, err := PathExists(unTarFolderURL)
 	if err != nil {
 		log.Error("CreateReadOnlyLayer, PathExists error: " + err.Error())
 		return
 	}
 	if !exist {
-		if err := os.Mkdir(busyboxURL, 0777); err != nil {
+		if err := os.MkdirAll(unTarFolderURL, 0777); err != nil {
 			log.Error("CreateReadOnlyLayer, Mkdir error: " + err.Error())
 			return
 		}
-		if _, err := exec.Command("tar", "-xvf", busyboxTarURL, "-C", busyboxURL).CombinedOutput(); err != nil {
+		if _, err := exec.Command("tar", "-xvf", imageURL, "-C", unTarFolderURL).CombinedOutput(); err != nil {
 			log.Error("CreateReadOnlyLayer, tar error: " + err.Error())
 		}
 	}
 }
 
-func CreateWriteLayer(RootURL string) {
-	writeURL := RootURL + "writeLayer/"
-	if err := os.Mkdir(writeURL, 0777); err != nil {
+func CreateWriteLayer(containerName string) {
+	writeURL := fmt.Sprintf(Common.WriteLayerURL, containerName)
+	if err := os.MkdirAll(writeURL, 0777); err != nil {
 		log.Debug("CreateWriteLayer, Mkdir error: " + err.Error())
 	}
 }
 
-func CreateMountPoint(RootURL, mntURL string) {
-	if err := os.Mkdir(mntURL, 0777); err != nil {
+func CreateMountPoint(containerName string, imageName string) {
+	mntURL := fmt.Sprintf(Common.MntPath, containerName)
+	if err := os.MkdirAll(mntURL, 0777); err != nil {
 		log.Debug("CreateMountPoint, Mkdir mntURL error: " + err.Error())
 		return
 	}
+	tmpWriteURL := fmt.Sprintf(Common.WriteLayerURL, containerName)
+	tmpImageLocation := Common.RootPath + "/" + imageName
 
-	workdirURL := RootURL + "work"
-	if err := os.Mkdir(workdirURL, 0777); err != nil {
+	workdirURL := fmt.Sprintf(Common.WorkDirURL, containerName)
+	if err := os.MkdirAll(workdirURL, 0777); err != nil {
 		log.Debug("CreateMountPoint, Mkdir Workdir error: " + err.Error())
 		return
 	}
 
 	builder := strings.Builder{}
 	builder.WriteString("lowerdir=")
-	builder.WriteString(RootURL + "busybox,")
+	builder.WriteString(tmpImageLocation + ",")
 	builder.WriteString("upperdir=")
-	builder.WriteString(RootURL + "writeLayer,")
+	builder.WriteString(tmpWriteURL + ",")
 	builder.WriteString("workdir=")
-	builder.WriteString(RootURL + "work")
+	builder.WriteString(workdirURL)
 
 	cmd := exec.Command("mount", "-t", "overlay", "overlay", "-o", builder.String(), mntURL)
+	log.Debug("CreateMountPoint, mount command: " + cmd.String())
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	if err := cmd.Run(); err != nil {
@@ -74,22 +80,23 @@ func PathExists(path string) (bool, error) {
 	return false, err
 }
 
-func DeleteWorkSpace(rootURL, mntURL, volume string) {
+func DeleteWorkSpace(containerName, volume, imageName string) {
 	if volume != "" {
 		volumeURLs := volumeUrlExtract(volume)
 		if len(volumeURLs) == 2 && volumeURLs[0] != "" && volumeURLs[1] != "" {
-			DeleteMountPointWithVolume(rootURL, mntURL, volumeURLs)
+			DeleteMountPointWithVolume(containerName, volumeURLs)
 		} else {
-			DeleteMountPoint(rootURL, mntURL)
+			DeleteMountPoint(containerName)
 		}
 	} else {
-		DeleteMountPoint(rootURL, mntURL)
+		DeleteMountPoint(containerName)
 	}
-	DeleteWriteLayer(rootURL)
-	DeleteWorkdir(rootURL)
+	DeleteWriteLayer(containerName)
+	DeleteWorkdir(containerName)
 }
 
-func DeleteMountPoint(rootURL, mntURL string) {
+func DeleteMountPoint(containerName string) {
+	mntURL := fmt.Sprintf(Common.MntPath, containerName)
 	cmd := exec.Command("umount", mntURL)
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
@@ -104,15 +111,15 @@ func DeleteMountPoint(rootURL, mntURL string) {
 	}
 }
 
-func DeleteWriteLayer(rootURL string) {
-	writeURL := rootURL + "writeLayer/"
+func DeleteWriteLayer(containerName string) {
+	writeURL := fmt.Sprintf(Common.WriteLayerURL, containerName)
 	if err := os.RemoveAll(writeURL); err != nil {
 		log.Error("DeleteWriteLayer, RemoveAll writeURL error: " + err.Error())
 	}
 }
 
-func DeleteWorkdir(rootURL string) {
-	workdirURL := rootURL + "work"
+func DeleteWorkdir(containerName string) {
+	workdirURL := fmt.Sprintf(Common.WorkDirURL, containerName)
 	if err := os.RemoveAll(workdirURL); err != nil {
 		log.Error("DeleteWorkdir, RemoveAll workdirURL error: " + err.Error())
 	}

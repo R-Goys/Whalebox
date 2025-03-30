@@ -4,7 +4,6 @@ import (
 	"fmt"
 
 	cgroup "github.com/R-Goys/Whalebox/cgroups"
-	Common "github.com/R-Goys/Whalebox/common"
 	"github.com/R-Goys/Whalebox/container"
 	"github.com/R-Goys/Whalebox/pkg/log"
 )
@@ -22,7 +21,7 @@ func removeContainer(containerName string) error {
 	cgroupManager := cgroup.GetCgroup("whalebox", containerInfo.Pid)
 	volume := containerInfo.Volume
 	deleteContainerInfo(containerName)
-	container.DeleteWorkSpace(Common.RootPath, Common.MntPath, volume)
+	container.DeleteWorkSpace(containerName, volume, containerInfo.ImageName)
 	cgroupManager.Remove()
 	log.Info("Container removed successfully")
 	return nil
