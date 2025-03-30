@@ -156,3 +156,43 @@
 2025-03-30T19:54:08.954+0800	INFO	cgroup whalebox/8528 removed
 2025-03-30T19:54:08.954+0800	INFO	Container removed successfully
 2025-03-30T19:54:12.176+0800	INFO	Starting Whalebox...
+2025-03-30T20:12:04.067+0800	INFO	Starting Whalebox...
+2025-03-30T20:12:04.067+0800	DEBUG	tty: true detch: false
+2025-03-30T20:12:04.067+0800	DEBUG	{"MemoryLimit":"","CpuShares":"","CpuSet":""}
+2025-03-30T20:12:04.067+0800	INFO	New pipe: read: 6, write: 7
+2025-03-30T20:12:04.067+0800	DEBUG	CreateMountPoint, mount command: /usr/bin/mount -t overlay overlay -o lowerdir=/home/rinai/PROJECTS/Whalebox/example/example3/busybox,upperdir=/home/rinai/PROJECTS/Whalebox/example/example3/writeLayer/bird,workdir=/home/rinai/PROJECTS/Whalebox/example/example3/workDir/bird /home/rinai/PROJECTS/Whalebox/example/example3/mnt/bird
+2025-03-30T20:12:04.069+0800	INFO	Command: /proc/self/exe init
+2025-03-30T20:12:04.070+0800	DEBUG	Record container info: {"pid":"12138","id":"N03KvEOdzKMl","name":"bird","volume":"","imageName":"busybox","command":"sh","createTime":"2025-03-30 20:12:04","status":"running"}
+2025-03-30T20:12:04.073+0800	INFO	Starting Whalebox...
+2025-03-30T20:12:04.073+0800	INFO	init command begin
+2025-03-30T20:12:04.073+0800	DEBUG	pipe Create
+2025-03-30T20:12:04.087+0800	DEBUG	memory limit not set
+2025-03-30T20:12:04.087+0800	DEBUG	cpu shares not set
+2025-03-30T20:12:04.087+0800	DEBUG	cpuset not set
+2025-03-30T20:12:04.087+0800	INFO	Sending command to container: sh
+2025-03-30T20:12:04.087+0800	INFO	Received command from parent: sh
+2025-03-30T20:12:04.087+0800	INFO	RunContainerInitProcess, cmd is: [sh]
+2025-03-30T20:12:04.087+0800	INFO	Current directory: /home/rinai/PROJECTS/Whalebox/example/example3/mnt/bird
+2025-03-30T20:12:04.088+0800	INFO	Find path: /bin/sh
+2025-03-30T20:12:27.316+0800	INFO	removing cgroup whalebox/12138
+2025-03-30T20:12:27.316+0800	INFO	cgroup whalebox/12138 removed
+2025-03-30T20:12:40.386+0800	INFO	Starting Whalebox...
+2025-03-30T20:12:40.386+0800	DEBUG	tty: true detch: false
+2025-03-30T20:12:40.386+0800	DEBUG	{"MemoryLimit":"","CpuShares":"","CpuSet":""}
+2025-03-30T20:12:40.386+0800	INFO	New pipe: read: 6, write: 7
+2025-03-30T20:12:40.386+0800	DEBUG	CreateMountPoint, mount command: /usr/bin/mount -t overlay overlay -o lowerdir=/home/rinai/PROJECTS/Whalebox/example/example3/busybox,upperdir=/home/rinai/PROJECTS/Whalebox/example/example3/writeLayer/bird,workdir=/home/rinai/PROJECTS/Whalebox/example/example3/workDir/bird /home/rinai/PROJECTS/Whalebox/example/example3/mnt/bird
+2025-03-30T20:12:40.388+0800	INFO	Command: /proc/self/exe init
+2025-03-30T20:12:40.389+0800	DEBUG	Record container info: {"pid":"12340","id":"KkYWE8xrBjfy","name":"bird","volume":"","imageName":"busybox","command":"sh","createTime":"2025-03-30 20:12:40","status":"running"}
+2025-03-30T20:12:40.391+0800	INFO	Starting Whalebox...
+2025-03-30T20:12:40.391+0800	INFO	init command begin
+2025-03-30T20:12:40.391+0800	DEBUG	pipe Create
+2025-03-30T20:12:40.402+0800	DEBUG	memory limit not set
+2025-03-30T20:12:40.402+0800	DEBUG	cpu shares not set
+2025-03-30T20:12:40.402+0800	DEBUG	cpuset not set
+2025-03-30T20:12:40.402+0800	INFO	Sending command to container: sh
+2025-03-30T20:12:40.402+0800	INFO	Received command from parent: sh
+2025-03-30T20:12:40.402+0800	INFO	RunContainerInitProcess, cmd is: [sh]
+2025-03-30T20:12:40.402+0800	INFO	Current directory: /home/rinai/PROJECTS/Whalebox/example/example3/mnt/bird
+2025-03-30T20:12:40.403+0800	INFO	Find path: /bin/sh
+2025-03-30T20:19:24.515+0800	INFO	removing cgroup whalebox/12340
+2025-03-30T20:19:24.515+0800	INFO	cgroup whalebox/12340 removed

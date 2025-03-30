@@ -14,8 +14,8 @@ import (
 	"github.com/R-Goys/Whalebox/pkg/log"
 )
 
-func Run(tty bool, cmdArray []string, resource *cgroup.ResourceConfig, volume, containerName, imageName string) {
-	parent, pipe := container.NewParentProcess(tty, volume, containerName, imageName)
+func Run(tty bool, cmdArray []string, resource *cgroup.ResourceConfig, volume, containerName, imageName string, envSlice []string) {
+	parent, pipe := container.NewParentProcess(tty, volume, containerName, imageName, envSlice)
 	if parent == nil {
 		log.Error("Failed to create parent process")
 		return

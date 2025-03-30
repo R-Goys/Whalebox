@@ -44,6 +44,10 @@ var runCommand = cli.Command{
 			Name:  "name",
 			Usage: "Set container name",
 		},
+		&cli.StringSliceFlag{
+			Name:  "e",
+			Usage: "Set environment variables for container",
+		},
 	},
 }
 

@@ -30,7 +30,7 @@ var (
 	CONTAINERLOGFILE    = "container.log"
 )
 
-func NewParentProcess(tty bool, volume, containerName, imageName string) (*exec.Cmd, *os.File) {
+func NewParentProcess(tty bool, volume, containerName, imageName string, envSlice []string) (*exec.Cmd, *os.File) {
 	readPipe, writePipe, err := NewPipe()
 	if err != nil {
 		log.Error("NewParentProcess: Failed to create pipe: " + err.Error())
@@ -76,7 +76,7 @@ func NewParentProcess(tty bool, volume, containerName, imageName string) (*exec.
 		cmd.Stdout = stdLogFile
 	}
 	cmd.ExtraFiles = []*os.File{readPipe}
-
+	cmd.Env = append(os.Environ(), envSlice...)
 	NewWorkSpace(imageName, containerName, volume)
 	cmd.Dir = fmt.Sprintf(Common.MntPath, containerName)
 	log.Info(fmt.Sprintf("Command: %v", cmd))
