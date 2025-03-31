@@ -37,7 +37,7 @@ type Endpoint struct {
 
 type NetworkDriver interface {
 	Name() string
-	Create(subnet string, name string) (*Network, error)
+	Create(subnet string, name string, driver string) (*Network, error)
 	Delete(network Network) error
 	Connect(*Network, *Endpoint) error
 	Disconnect(*Network, *Endpoint) error
@@ -45,14 +45,14 @@ type NetworkDriver interface {
 
 func CreateNetwork(driver, subnet, name string) error {
 	_, cidr, _ := net.ParseCIDR(subnet)
-	gatewayIp, err := IpAllocator.Allocate(cidr)
+	ip, err := IpAllocator.Allocate(cidr)
 	if err != nil {
 		log.Error("Failed to allocate IP address for network " + name)
 		return err
 	}
-	cidr.IP = gatewayIp
-
-	nw, err := drivers[driver].Create(cidr.String(), name)
+	cidr.IP = ip
+	log.Debug("Allocated IP address " + ip.String() + " for network " + name)
+	nw, err := drivers[driver].Create(cidr.String(), name, driver)
 	if err != nil {
 		log.Error("Failed to create network " + name)
 		return err
@@ -138,7 +138,7 @@ func Connect(networkName string, cInfo *container.Container) error {
 		log.Error("Failed to configure container " + cInfo.Name + " IP address and route")
 		return err
 	}
-	return configPortMapping(&endpoint, cInfo)
+	return configPortMapping(&endpoint)
 }
 
 func Init() error {

@@ -11,10 +11,11 @@ import (
 
 	cgroup "github.com/R-Goys/Whalebox/cgroups"
 	"github.com/R-Goys/Whalebox/container"
+	"github.com/R-Goys/Whalebox/network"
 	"github.com/R-Goys/Whalebox/pkg/log"
 )
 
-func Run(tty bool, cmdArray []string, resource *cgroup.ResourceConfig, volume, containerName, imageName string, envSlice []string, port []string, network string) {
+func Run(tty bool, cmdArray []string, resource *cgroup.ResourceConfig, volume, containerName, imageName string, envSlice []string, port []string, networkName string) {
 	containerID := randStringBytes(12)
 	if containerName == "" {
 		containerName = containerID
@@ -36,8 +37,8 @@ func Run(tty bool, cmdArray []string, resource *cgroup.ResourceConfig, volume, c
 	}
 	cgroupManager := cgroup.NewCgroup("whalebox", strconv.Itoa(parent.Process.Pid))
 	cgroupManager.Set(resource)
-	if network != "" {
-		// config container network
+	if networkName != "" {
+		// 初始化网络
 		network.Init()
 		containerInfo := &container.Container{
 			Id:          containerID,
@@ -45,8 +46,9 @@ func Run(tty bool, cmdArray []string, resource *cgroup.ResourceConfig, volume, c
 			Name:        containerName,
 			PortMapping: port,
 		}
-		if err := network.Connect(network, containerInfo); err != nil {
-			log.Error("Error Connect Network %v", err)
+		// 连接网络
+		if err := network.Connect(networkName, containerInfo); err != nil {
+			log.Error("Error Connect Network: " + err.Error())
 			return
 		}
 	}

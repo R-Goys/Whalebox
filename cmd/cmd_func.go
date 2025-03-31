@@ -10,6 +10,7 @@ import (
 	cgroup "github.com/R-Goys/Whalebox/cgroups"
 	Common "github.com/R-Goys/Whalebox/common"
 	"github.com/R-Goys/Whalebox/container"
+	"github.com/R-Goys/Whalebox/network"
 	"github.com/R-Goys/Whalebox/pkg/log"
 	"github.com/urfave/cli"
 )
@@ -51,7 +52,7 @@ func runAction(c *cli.Context) error {
 	volume := c.String("v")
 	containerName := c.String("name")
 	envSlice := c.StringSlice("e")
-	port := c.String("p")
+	port := c.StringSlice("p")
 	network := c.String("net")
 	imageName := cmdArray[0]
 	cmdArray = cmdArray[1:]
@@ -123,5 +124,35 @@ func removeAction(c *cli.Context) error {
 	}
 	containerName := c.Args().Get(0)
 	removeContainer(containerName)
+	return nil
+}
+
+func CreateNetworkAction(context *cli.Context) error {
+	if len(context.Args()) < 1 {
+		return fmt.Errorf("please provide network name")
+	}
+	network.Init()
+	err := network.CreateNetwork(context.String("driver"), context.String("subnet"), context.Args()[0])
+	if err != nil {
+		return fmt.Errorf("create network error: %+v", err)
+	}
+	return nil
+}
+
+func ListNetworkAction(context *cli.Context) error {
+	network.Init()
+	network.ListNetworks()
+	return nil
+}
+
+func RemoveNetworkAction(context *cli.Context) error {
+	if len(context.Args()) < 1 {
+		return fmt.Errorf("please provide network name")
+	}
+	network.Init()
+	err := network.DeleteNetwork(context.Args()[0])
+	if err != nil {
+		return fmt.Errorf("remove network error: %+v", err)
+	}
 	return nil
 }

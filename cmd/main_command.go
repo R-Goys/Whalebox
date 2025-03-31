@@ -94,3 +94,40 @@ var removeCommand = cli.Command{
 	Usage:  "Remove a container",
 	Action: removeAction,
 }
+var networkCommand = cli.Command{
+	Name:  "network",
+	Usage: "container network commands",
+	Subcommands: []cli.Command{
+		NetworkCreateCommand,
+		ListNetWorkCommand,
+		RemoveNetworkCommand,
+	},
+}
+
+var NetworkCreateCommand = cli.Command{
+	Name:  "create",
+	Usage: "create a container network",
+	Flags: []cli.Flag{
+		cli.StringFlag{
+			Name:  "driver",
+			Usage: "network driver",
+		},
+		cli.StringFlag{
+			Name:  "subnet",
+			Usage: "subnet cidr",
+		},
+	},
+	Action: CreateNetworkAction,
+}
+
+var ListNetWorkCommand = cli.Command{
+	Name:   "list",
+	Usage:  "list container network",
+	Action: ListNetworkAction,
+}
+
+var RemoveNetworkCommand = cli.Command{
+	Name:   "remove",
+	Usage:  "remove container network",
+	Action: RemoveNetworkAction,
+}

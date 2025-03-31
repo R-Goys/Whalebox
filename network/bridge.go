@@ -14,8 +14,7 @@ import (
 	"github.com/vishvananda/netns"
 )
 
-type BridgeNetworkDriver struct {
-}
+type BridgeNetworkDriver struct{}
 
 // Delete implements NetworkDriver.
 func (d *BridgeNetworkDriver) Delete(network Network) error {
@@ -40,12 +39,13 @@ func (d *BridgeNetworkDriver) Name() string {
 
 var _ NetworkDriver = &BridgeNetworkDriver{}
 
-func (d *BridgeNetworkDriver) Create(subnet, name string) (*Network, error) {
+func (d *BridgeNetworkDriver) Create(subnet, name, driver string) (*Network, error) {
 	ip, iprange, _ := net.ParseCIDR(subnet)
 	iprange.IP = ip
 	n := &Network{
 		Name:    name,
 		IpRange: iprange,
+		Driver:  driver,
 	}
 
 	err := d.initBridge(n)
@@ -57,6 +57,7 @@ func (d *BridgeNetworkDriver) Create(subnet, name string) (*Network, error) {
 }
 
 func (d *BridgeNetworkDriver) initBridge(n *Network) error {
+	log.Debug("Initializing bridge network")
 	bridgeName := n.Name
 	if err := createBridgeInterface(bridgeName); err != nil {
 		log.Error("Failed to create bridge" + err.Error())
@@ -110,8 +111,8 @@ func setInterfaceUp(interfaceName string) error {
 	return nil
 }
 
-func setupIPTables(bridgeName string, iprange *net.IPNet) error {
-	iptablecmd := fmt.Sprintf("-t nat -A POSTROUTING -s %s ! -o %s -j MASQUERADE", iprange.String(), bridgeName)
+func setupIPTables(bridgeName string, subnet *net.IPNet) error {
+	iptablecmd := fmt.Sprintf("-t nat -A POSTROUTING -s %s ! -o %s -j MASQUERADE", subnet.String(), bridgeName)
 	cmd := exec.Command("iptables", strings.Split(iptablecmd, " ")...)
 	output, err := cmd.Output()
 	if err != nil {
@@ -124,8 +125,14 @@ func setupIPTables(bridgeName string, iprange *net.IPNet) error {
 
 func createBridgeInterface(bridgeName string) error {
 	_, err := net.InterfaceByName(bridgeName)
-	if err == nil || !strings.Contains(err.Error(), "no such network interface") {
-		log.Error("Failed to create bridge interface: " + bridgeName + " error: " + err.Error())
+	if err == nil {
+		log.Info("Bridge interface already exists: " + bridgeName)
+		return nil
+	}
+	if strings.Contains(err.Error(), "no such network interface") {
+		log.Info("Creating bridge interface: " + bridgeName)
+	} else {
+		log.Error("Failed to get bridge interface: " + bridgeName + " error: " + err.Error())
 		return err
 	}
 
@@ -135,19 +142,20 @@ func createBridgeInterface(bridgeName string) error {
 	br := &netlink.Bridge{LinkAttrs: la}
 	if err := netlink.LinkAdd(br); err != nil {
 		log.Error("Failed to create bridge interface: " + bridgeName + " error: " + err.Error())
-		return fmt.Errorf("Bridge creation failed for bridge %s: %v", bridgeName, err)
+		return fmt.Errorf("bridge creation failed for bridge %s: %v", bridgeName, err)
 	}
 	return nil
 }
 
 func (d *BridgeNetworkDriver) Connect(n *Network, endpoint *Endpoint) error {
 	bridgeName := n.Name
+	//通过名字获取网桥
 	br, err := netlink.LinkByName(bridgeName)
 	if err != nil {
 		log.Error("Failed to get bridge: " + bridgeName + " error: " + err.Error())
 		return err
 	}
-
+	//创建veth pair
 	la := netlink.NewLinkAttrs()
 	la.Name = endpoint.ID[:5]
 	la.MasterIndex = br.Attrs().Index
@@ -168,6 +176,7 @@ func (d *BridgeNetworkDriver) Connect(n *Network, endpoint *Endpoint) error {
 	return nil
 }
 
+// 真正的插上网线
 func configEndpointIpAddressAndRoute(endpoint *Endpoint, cinfo *container.Container) error {
 	peerLink, err := netlink.LinkByName(endpoint.Device.PeerName)
 	if err != nil {
@@ -177,10 +186,10 @@ func configEndpointIpAddressAndRoute(endpoint *Endpoint, cinfo *container.Contai
 
 	defer enterContainerNamespace(&peerLink, cinfo)()
 
-	interfaceIP := endpoint.Network.IpRange
+	interfaceIP := *endpoint.Network.IpRange
 	interfaceIP.IP = endpoint.IPAddress
 
-	if err := setInterfaceIP(endpoint.Device.Name, interfaceIP.String()); err != nil {
+	if err = setInterfaceIP(endpoint.Device.PeerName, interfaceIP.String()); err != nil {
 		log.Error("Failed to assign Address: " + interfaceIP.String() + " to endpoint: " + endpoint.ID + " error: " + err.Error())
 		return err
 	}
@@ -189,7 +198,7 @@ func configEndpointIpAddressAndRoute(endpoint *Endpoint, cinfo *container.Contai
 		log.Error("Failed to set endpoint up: " + endpoint.ID + " error: " + err.Error())
 		return err
 	}
-
+	//"lo"是回环设备，用于容器内部的网络通信，这里确实能够实现他的功能
 	if err = setInterfaceUp("lo"); err != nil {
 		log.Error("Failed to set lo up: " + err.Error())
 		return err
@@ -198,8 +207,7 @@ func configEndpointIpAddressAndRoute(endpoint *Endpoint, cinfo *container.Contai
 	defaultRoute := &netlink.Route{
 		LinkIndex: peerLink.Attrs().Index,
 		Dst:       cidr,
-		Scope:     netlink.SCOPE_LINK,
-		Gw:        interfaceIP.IP,
+		Gw:        endpoint.Network.IpRange.IP,
 	}
 	if err := netlink.RouteAdd(defaultRoute); err != nil {
 		log.Error("Failed to add default route to endpoint: " + endpoint.ID + " error: " + err.Error())
@@ -209,7 +217,8 @@ func configEndpointIpAddressAndRoute(endpoint *Endpoint, cinfo *container.Contai
 }
 
 func enterContainerNamespace(link *netlink.Link, cinfo *container.Container) func() {
-	f, err := os.OpenFile(fmt.Sprintf("proc/%d/ns/net", cinfo.Pid), os.O_RDONLY, 0)
+	log.Debug("Entering container namespace")
+	f, err := os.OpenFile(fmt.Sprintf("/proc/%s/ns/net", cinfo.Pid), os.O_RDONLY, 0)
 	if err != nil {
 		log.Error("Failed to open container netns: " + err.Error())
 		return func() {}
@@ -223,7 +232,7 @@ func enterContainerNamespace(link *netlink.Link, cinfo *container.Container) fun
 		return func() {}
 	}
 	//获取namespace，方便关闭
-	orign, err := netns.Get()
+	origns, err := netns.Get()
 	if err != nil {
 		log.Error("Failed to get current netns: " + err.Error())
 		return func() {}
@@ -235,20 +244,21 @@ func enterContainerNamespace(link *netlink.Link, cinfo *container.Container) fun
 	}
 
 	return func() {
-		netns.Set(orign)
-		orign.Close()
+		netns.Set(origns)
+		origns.Close()
 		runtime.UnlockOSThread()
 		f.Close()
 	}
 }
 
-func configPortMapping(endpoint *Endpoint, cinfo *container.Container) error {
+func configPortMapping(endpoint *Endpoint) error {
 	for _, mapping := range endpoint.PortMapping {
 		port := strings.Split(mapping, ":")
 		if len(port) != 2 {
 			log.Error("Invalid port mapping: " + mapping)
 			continue
 		}
+		log.Debug("Configuring port mapping: " + mapping + " for endpoint: " + endpoint.IPAddress.String())
 		iptablescmd := fmt.Sprintf("-t nat -A PREROUTING -p tcp -m tcp --dport %s -j DNAT --to-destination %s:%s", port[0], endpoint.IPAddress.String(), port[1])
 		cmd := exec.Command("iptables", strings.Split(iptablescmd, " ")...)
 		output, err := cmd.Output()
