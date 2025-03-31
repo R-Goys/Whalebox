@@ -1,62 +1,6 @@
-2025-03-30T20:40:40.821+0800	INFO	Starting Whalebox...
-2025-03-30T20:40:40.822+0800	DEBUG	tty: true detch: false
-2025-03-30T20:40:40.822+0800	DEBUG	{"MemoryLimit":"","CpuShares":"","CpuSet":""}
-2025-03-30T20:40:40.822+0800	INFO	New pipe: read: 6, write: 7
-2025-03-30T20:40:40.822+0800	DEBUG	CreateMountPoint, mount command: /usr/bin/mount -t overlay overlay -o lowerdir=/home/rinai/PROJECTS/Whalebox/example/example3/busybox,upperdir=/home/rinai/PROJECTS/Whalebox/example/example3/writeLayer/,workdir=/home/rinai/PROJECTS/Whalebox/example/example3/workDir/ /home/rinai/PROJECTS/Whalebox/example/example3/mnt/
-2025-03-30T20:40:40.824+0800	INFO	Command: /proc/self/exe init
-2025-03-30T20:40:40.825+0800	DEBUG	Record container info: {"pid":"15327","id":"tl11ANCHeLOr","name":"tl11ANCHeLOr","volume":"","imageName":"busybox","command":"sh","createTime":"2025-03-30 20:40:40","status":"running"}
-2025-03-30T20:40:40.827+0800	INFO	Starting Whalebox...
-2025-03-30T20:40:40.827+0800	INFO	init command begin
-2025-03-30T20:40:40.827+0800	DEBUG	pipe Create
-2025-03-30T20:40:40.838+0800	DEBUG	memory limit not set
-2025-03-30T20:40:40.838+0800	DEBUG	cpu shares not set
-2025-03-30T20:40:40.838+0800	DEBUG	cpuset not set
-2025-03-30T20:40:40.838+0800	INFO	Sending command to container: sh
-2025-03-30T20:40:40.838+0800	INFO	Received command from parent: sh
-2025-03-30T20:40:40.838+0800	INFO	RunContainerInitProcess, cmd is: [sh]
-2025-03-30T20:40:40.838+0800	INFO	Current directory: /home/rinai/PROJECTS/Whalebox/example/example3/mnt
-2025-03-30T20:40:40.839+0800	INFO	Find path: /bin/sh
-2025-03-30T20:40:45.431+0800	ERROR	DeleteMountPoint, umount error: exit status 32
-2025-03-30T20:40:45.431+0800	INFO	removing cgroup whalebox/15327
-2025-03-30T20:40:45.431+0800	INFO	cgroup whalebox/15327 removed
-2025-03-30T20:42:26.801+0800	INFO	Starting Whalebox...
-2025-03-30T20:42:26.801+0800	DEBUG	tty: true detch: false
-2025-03-30T20:42:26.801+0800	DEBUG	{"MemoryLimit":"","CpuShares":"","CpuSet":""}
-2025-03-30T20:42:26.801+0800	INFO	New pipe: read: 6, write: 7
-2025-03-30T20:42:26.801+0800	DEBUG	CreateMountPoint, mount command: /usr/bin/mount -t overlay overlay -o lowerdir=/home/rinai/PROJECTS/Whalebox/example/example3/busybox,upperdir=/home/rinai/PROJECTS/Whalebox/example/example3/writeLayer/bird,workdir=/home/rinai/PROJECTS/Whalebox/example/example3/workDir/bird /home/rinai/PROJECTS/Whalebox/example/example3/mnt/bird
-2025-03-30T20:42:26.803+0800	INFO	Command: /proc/self/exe init
-2025-03-30T20:42:26.804+0800	DEBUG	Record container info: {"pid":"15566","id":"BzTLtB9FRyyN","name":"bird","volume":"","imageName":"busybox","command":"sh","createTime":"2025-03-30 20:42:26","status":"running"}
-2025-03-30T20:42:26.806+0800	INFO	Starting Whalebox...
-2025-03-30T20:42:26.806+0800	INFO	init command begin
-2025-03-30T20:42:26.806+0800	DEBUG	pipe Create
-2025-03-30T20:42:26.821+0800	DEBUG	memory limit not set
-2025-03-30T20:42:26.821+0800	DEBUG	cpu shares not set
-2025-03-30T20:42:26.821+0800	DEBUG	cpuset not set
-2025-03-30T20:42:26.821+0800	INFO	Sending command to container: sh
-2025-03-30T20:42:26.821+0800	INFO	Received command from parent: sh
-2025-03-30T20:42:26.821+0800	INFO	RunContainerInitProcess, cmd is: [sh]
-2025-03-30T20:42:26.821+0800	INFO	Current directory: /home/rinai/PROJECTS/Whalebox/example/example3/mnt/bird
-2025-03-30T20:42:26.822+0800	INFO	Find path: /bin/sh
-2025-03-30T20:42:51.632+0800	INFO	removing cgroup whalebox/15566
-2025-03-30T20:42:51.632+0800	INFO	cgroup whalebox/15566 removed
-2025-03-30T20:46:59.552+0800	INFO	Starting Whalebox...
-2025-03-30T20:46:59.552+0800	DEBUG	tty: true detch: false
-2025-03-30T20:46:59.552+0800	DEBUG	{"MemoryLimit":"","CpuShares":"","CpuSet":""}
-2025-03-30T20:46:59.552+0800	INFO	New pipe: read: 6, write: 7
-2025-03-30T20:46:59.552+0800	DEBUG	CreateMountPoint, mntURL: /home/rinai/PROJECTS/Whalebox/example/example3/mnt/Ju03dDGzapm4
-2025-03-30T20:46:59.552+0800	DEBUG	CreateMountPoint, mount command: /usr/bin/mount -t overlay overlay -o lowerdir=/home/rinai/PROJECTS/Whalebox/example/example3/busybox,upperdir=/home/rinai/PROJECTS/Whalebox/example/example3/writeLayer/Ju03dDGzapm4,workdir=/home/rinai/PROJECTS/Whalebox/example/example3/workDir/Ju03dDGzapm4 /home/rinai/PROJECTS/Whalebox/example/example3/mnt/Ju03dDGzapm4
-2025-03-30T20:46:59.553+0800	INFO	Command: /proc/self/exe init
-2025-03-30T20:46:59.555+0800	DEBUG	Record container info: {"pid":"16216","id":"yTI3ZjYJykNj","name":"Ju03dDGzapm4","volume":"","imageName":"busybox","command":"sh","createTime":"2025-03-30 20:46:59","status":"running"}
-2025-03-30T20:46:59.558+0800	INFO	Starting Whalebox...
-2025-03-30T20:46:59.558+0800	INFO	init command begin
-2025-03-30T20:46:59.558+0800	DEBUG	pipe Create
-2025-03-30T20:46:59.563+0800	DEBUG	memory limit not set
-2025-03-30T20:46:59.563+0800	DEBUG	cpu shares not set
-2025-03-30T20:46:59.563+0800	DEBUG	cpuset not set
-2025-03-30T20:46:59.563+0800	INFO	Sending command to container: sh
-2025-03-30T20:46:59.563+0800	INFO	Received command from parent: sh
-2025-03-30T20:46:59.563+0800	INFO	RunContainerInitProcess, cmd is: [sh]
-2025-03-30T20:46:59.563+0800	INFO	Current directory: /home/rinai/PROJECTS/Whalebox/example/example3/mnt/Ju03dDGzapm4
-2025-03-30T20:46:59.563+0800	INFO	Find path: /bin/sh
-2025-03-30T20:47:10.618+0800	INFO	removing cgroup whalebox/16216
-2025-03-30T20:47:10.618+0800	INFO	cgroup whalebox/16216 removed
+2025-03-31T16:28:02.694+0800	ERROR	Failed to load subnet allocator file: EOF
+2025-03-31T16:28:02.694+0800	DEBUG	Allocating IP offset: 0
+2025-03-31T16:28:02.694+0800	DEBUG	192.168.1.1
+2025-03-31T16:28:05.437+0800	DEBUG	Loaded subnets: map[192.168.1.0/24:1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000]
+2025-03-31T16:28:05.437+0800	DEBUG	map: 1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+2025-03-31T16:28:05.437+0800	DEBUG	offset: 0

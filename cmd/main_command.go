@@ -48,6 +48,14 @@ var runCommand = cli.Command{
 			Name:  "e",
 			Usage: "Set environment variables for container",
 		},
+		&cli.StringSliceFlag{
+			Name:  "p",
+			Usage: "Publish a container's port to the host",
+		},
+		&cli.StringFlag{
+			Name:  "net",
+			Usage: "Set network mode for container",
+		},
 	},
 }
 

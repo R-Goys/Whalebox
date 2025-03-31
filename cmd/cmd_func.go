@@ -51,11 +51,13 @@ func runAction(c *cli.Context) error {
 	volume := c.String("v")
 	containerName := c.String("name")
 	envSlice := c.StringSlice("e")
+	port := c.String("p")
+	network := c.String("net")
 	imageName := cmdArray[0]
 	cmdArray = cmdArray[1:]
 	re, _ := json.Marshal(resource)
 	log.Debug(string(re))
-	Run(tty, cmdArray, resource, volume, containerName, imageName, envSlice)
+	Run(tty, cmdArray, resource, volume, containerName, imageName, envSlice, port, network)
 	return nil
 }
 

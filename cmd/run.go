@@ -14,9 +14,10 @@ import (
 	"github.com/R-Goys/Whalebox/pkg/log"
 )
 
-func Run(tty bool, cmdArray []string, resource *cgroup.ResourceConfig, volume, containerName, imageName string, envSlice []string) {
+func Run(tty bool, cmdArray []string, resource *cgroup.ResourceConfig, volume, containerName, imageName string, envSlice []string, port []string, network string) {
+	containerID := randStringBytes(12)
 	if containerName == "" {
-		containerName = randStringBytes(12)
+		containerName = containerID
 	}
 	parent, pipe := container.NewParentProcess(tty, volume, containerName, imageName, envSlice)
 	if parent == nil {
@@ -28,13 +29,27 @@ func Run(tty bool, cmdArray []string, resource *cgroup.ResourceConfig, volume, c
 		return
 	}
 	fmt.Println("Container started, pid: ", parent.Process.Pid)
-	containerName, err := RecordContainerInfo(parent.Process.Pid, cmdArray, containerName, volume, imageName)
+	containerName, err := RecordContainerInfo(parent.Process.Pid, cmdArray, containerName, containerID, volume, imageName)
 	if err != nil {
 		log.Error("Record container info error" + err.Error())
 		return
 	}
 	cgroupManager := cgroup.NewCgroup("whalebox", strconv.Itoa(parent.Process.Pid))
 	cgroupManager.Set(resource)
+	if network != "" {
+		// config container network
+		network.Init()
+		containerInfo := &container.Container{
+			Id:          containerID,
+			Pid:         strconv.Itoa(parent.Process.Pid),
+			Name:        containerName,
+			PortMapping: port,
+		}
+		if err := network.Connect(network, containerInfo); err != nil {
+			log.Error("Error Connect Network %v", err)
+			return
+		}
+	}
 	sendInitCommand(cmdArray, pipe)
 	if tty {
 		parent.Wait()
@@ -66,15 +81,11 @@ func randStringBytes(n int) string {
 	return string(b)
 }
 
-func RecordContainerInfo(ContainerPID int, commandArray []string, containerName, volume, imageName string) (string, error) {
-	id := randStringBytes(12)
+func RecordContainerInfo(ContainerPID int, commandArray []string, containerName, ContainerID, volume, imageName string) (string, error) {
 	createTime := time.Now().Format("2006-01-02 15:04:05")
-	if containerName == "" {
-		containerName = id
-	}
 	command := strings.Join(commandArray, " ")
 	containerInfo := &container.Container{
-		Id:         id,
+		Id:         ContainerID,
 		Name:       containerName,
 		Pid:        strconv.Itoa(ContainerPID),
 		Volume:     volume,
