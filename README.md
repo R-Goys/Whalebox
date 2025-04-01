@@ -26,7 +26,7 @@ Cgroup v2与原书的主要不同之处在于，它允许容器独自拥有一�
 1. 克隆仓库：
 
 ```bash
-git clone https://github.com/rinai/Whalebox.git
+git clone https://github.com/R-Goys/Whalebox.git
 ```
 
 2. 安装所需的包：

@@ -184,44 +184,17 @@ func configEndpointIpAddressAndRoute(endpoint *Endpoint, cinfo *container.Contai
 		return err
 	}
 
-	defer enterContainerNamespace(&peerLink, cinfo)()
+	defer enterContainerNamespace(&peerLink, cinfo, endpoint)()
 
-	interfaceIP := *endpoint.Network.IpRange
-	interfaceIP.IP = endpoint.IPAddress
-
-	if err = setInterfaceIP(endpoint.Device.PeerName, interfaceIP.String()); err != nil {
-		log.Error("Failed to assign Address: " + interfaceIP.String() + " to endpoint: " + endpoint.ID + " error: " + err.Error())
-		return err
-	}
-
-	if err = setInterfaceUp(endpoint.Device.PeerName); err != nil {
-		log.Error("Failed to set endpoint up: " + endpoint.ID + " error: " + err.Error())
-		return err
-	}
-	//"lo"是回环设备，用于容器内部的网络通信，这里确实能够实现他的功能
-	if err = setInterfaceUp("lo"); err != nil {
-		log.Error("Failed to set lo up: " + err.Error())
-		return err
-	}
-	_, cidr, _ := net.ParseCIDR("0.0.0.0/0")
-	defaultRoute := &netlink.Route{
-		LinkIndex: peerLink.Attrs().Index,
-		Dst:       cidr,
-		Gw:        endpoint.Network.IpRange.IP,
-	}
-	if err := netlink.RouteAdd(defaultRoute); err != nil {
-		log.Error("Failed to add default route to endpoint: " + endpoint.ID + " error: " + err.Error())
-		return err
-	}
 	return nil
 }
 
-func enterContainerNamespace(link *netlink.Link, cinfo *container.Container) func() {
+func enterContainerNamespace(link *netlink.Link, cinfo *container.Container, endpoint *Endpoint) func() {
 	log.Debug("Entering container namespace")
 	f, err := os.OpenFile(fmt.Sprintf("/proc/%s/ns/net", cinfo.Pid), os.O_RDONLY, 0)
 	if err != nil {
 		log.Error("Failed to open container netns: " + err.Error())
-		return func() {}
+		return nil
 	}
 	nsFD := f.Fd()
 
@@ -229,18 +202,47 @@ func enterContainerNamespace(link *netlink.Link, cinfo *container.Container) fun
 
 	if err := netlink.LinkSetNsFd(*link, int(nsFD)); err != nil {
 		log.Error("Failed to set link netns: " + err.Error())
-		return func() {}
+		return nil
 	}
 	//获取namespace，方便关闭
 	origns, err := netns.Get()
 	if err != nil {
 		log.Error("Failed to get current netns: " + err.Error())
-		return func() {}
+		return nil
 	}
 
 	if err = netns.Set(netns.NsHandle(nsFD)); err != nil {
 		log.Error("Failed to set netns: " + err.Error())
-		return func() {}
+		return nil
+	}
+
+	interfaceIP := *endpoint.Network.IpRange
+	interfaceIP.IP = endpoint.IPAddress
+
+	if err = setInterfaceUp(endpoint.Device.PeerName); err != nil {
+		log.Error("Failed to set endpoint up: " + endpoint.ID + " error: " + err.Error())
+		return nil
+	}
+
+	if err = setInterfaceIP(endpoint.Device.PeerName, interfaceIP.String()); err != nil {
+		log.Error("Failed to assign Address: " + interfaceIP.String() + " to endpoint: " + endpoint.ID + " error: " + err.Error())
+		return nil
+	}
+
+	//"lo"是回环设备，用于容器内部的网络通信，这里确实能够实现他的功能
+	if err = setInterfaceUp("lo"); err != nil {
+		log.Error("Failed to set lo up: " + err.Error())
+		return nil
+	}
+	_, cidr, _ := net.ParseCIDR("0.0.0.0/0")
+	defaultRoute := &netlink.Route{
+		LinkIndex: (*link).Attrs().Index,
+		Dst:       cidr,
+		Gw:        endpoint.Network.IpRange.IP,
+	}
+	if err := netlink.RouteAdd(defaultRoute); err != nil {
+		log.Error("Failed to add default route to endpoint: " + endpoint.ID + " error: " + err.Error())
+		return nil
 	}
 
 	return func() {
@@ -248,6 +250,8 @@ func enterContainerNamespace(link *netlink.Link, cinfo *container.Container) fun
 		origns.Close()
 		runtime.UnlockOSThread()
 		f.Close()
+
+		log.Info("Exiting container namespace")
 	}
 }
 
