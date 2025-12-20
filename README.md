@@ -17,7 +17,8 @@ Cgroup v2与原书的主要不同之处在于，它允许容器独自拥有一�
 换句话说，Cgroup v2是一个树状结构，这种结构使得容器管理更加灵活，方便。
 而OverlayFS也是一种存储技术，表面看区别并不大，主要在于文件结构和实现有一些不同。
 更多详情可以看我的Note，关于本项目的实现全过程。
-[Whalebox](https://github.com/R-Goys/Notes/blob/main/Note/%E6%89%8B%E6%90%93/%E6%89%8B%E5%86%99Docker.md)
+
+[Whalebox](https://github.com/R-Goys/Notes/blob/main/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AD%A6%E4%B9%A0/%E6%89%8B%E6%90%93/%E6%89%8B%E5%86%99Docker.md)
 
 ## Getting Started
 
